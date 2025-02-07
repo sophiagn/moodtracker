@@ -1,3 +1,3 @@
 # moodtracker
 
-Run `pip install eel` in th project directory.
+Run `pip install eel` in the project directory.
