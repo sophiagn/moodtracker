@@ -1,0 +1,84 @@
+
+/* Reset some default styles */
+
+body {
+    font-family: poppins;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+
+/* Container for the tabs */
+
+.tabs {
+    display: flex;
+    justify-content: space-between; /* Position tabs on each side */
+    align-items: center; /* Center items vertically */
+    background-color: #F1E4E8;
+    padding: 10px;
+}
+
+/* Style for the title */
+
+.tabs h1 {
+    margin: 0; /* Remove default margin */
+    font-size: 36px;
+}
+
+/* Style for the tab buttons */
+
+.tab1-button {
+    font-family: poppins;
+    font-weight: bold;
+    padding: 15px 25px;
+    border: none;
+    background-color: #CEB1BE;
+    cursor: pointer;
+    font-size: 26px;
+    border-radius: 10px 10px 0 0; /* Makes them look like browser tabs */
+    margin: 0 5px;
+    transition: background 0.3s ease, color 0.3s ease;
+    width: 35%;
+}
+
+.tab2-button {
+    font-family: poppins;
+    font-weight: bold;
+    padding: 15px 25px;
+    border: none;
+    background-color: #B97375;
+    cursor: pointer;
+    font-size: 26px;
+    border-radius: 10px 10px 0 0; /* Makes them look like browser tabs */
+    margin: 0 5px;
+    transition: background 0.3s ease, color 0.3s ease;
+    width: 35%;
+}
+
+
+/* Style the content area */
+.tab1-content {
+    width: 100%;
+    height: 700px;
+    margin: auto;
+    background: #CEB1BE;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.tab2-content {
+    width: 100%;
+    height: 700px;
+    margin: auto;
+    background-color: #B97375;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+/* Style the iframe inside the tab content */
+iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
