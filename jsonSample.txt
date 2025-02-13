@@ -1,0 +1,69 @@
+{
+  "emotionLog": [
+    {
+      "dayOfWeek": "Wednesday",
+      "date": "2-11-2025",
+      "time": "12:42 PM",
+      "intensity": 4,
+      "emotion": "Stressed",
+      "category": "Bad",
+      "reasons": [
+        "Work",
+        "Thoughts about the future",
+        "Mental disorder"
+      ]
+    },
+    {
+      "dayOfWeek": "Monday",
+      "date": "2-9-2025",
+      "time": "3:15 PM",
+      "intensity": 2,
+      "emotion": "Anxious",
+      "category": "Bad",
+      "reasons": [
+        "Physical health",
+        "Thoughts about the past",
+        "Myself"
+      ]
+    },
+    {
+      "dayOfWeek": "Tuesday",
+      "date": "2-10-2025",
+      "time": "5:30 PM",
+      "intensity": 5,
+      "emotion": "Joyful",
+      "category": "Good",
+      "reasons": [
+        "Friends",
+        "Partner",
+        "Family"
+      ]
+    },
+    {
+      "dayOfWeek": "Friday",
+      "date": "2-15-2025",
+      "time": "7:45 PM",
+      "intensity": 3,
+      "emotion": "Calm",
+      "category": "Neutral",
+      "reasons": [
+        "School",
+        "Work",
+        "Thoughts about the future"
+      ]
+    },
+    {
+      "dayOfWeek": "Saturday",
+      "date": "2-16-2025",
+      "time": "9:20 PM",
+      "intensity": 1,
+      "emotion": "Content",
+      "category": "Good",
+      "reasons": [
+        "No reason",
+        "Myself",
+        "Unknown"
+      ]
+    }
+  ]
+}
