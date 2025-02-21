@@ -2,11 +2,14 @@ import eel
 import sqlite3
 import json
 
-#created an empty database - CREATE
+# Connect to database
 conn = sqlite3.connect("emotion.db")
-cursor = conn.cursor() # cursor object that allows us to traverse our database, and cursor.execute to interact with database via sql request
 
-#only creates table when it doesn't exist
+# Cursor object allows database traversal
+cursor = conn.cursor() 
+
+# Create table if it doesn't exist already
+# cursor.execute to interact with database via sql request
 cursor.execute("""
                CREATE TABLE IF NOT EXISTS mood_tracker ( 
                     day_of_week TEXT, 
@@ -17,22 +20,25 @@ cursor.execute("""
                     category TEXT, 
                     reasons TEXT
                )
-            """)  #Table contains 7 columns, day of week, date, time, (emotion) intensity, emotion, category, reasons
+            """)
 
-#opens and reads the JSON file
+# Opens and reads the sample JSON file
 with open("jsonSample.txt", "r") as input:
     inputFile = json.load(input)
 
-for entry in inputFile.get("emotionLog", []): #iterates through the emotionLog key and retrieves a list of dictionaries [] so no error occurs if emotionlog doesn't exist
-    reasons_str = ", ".join(entry.get("reasons", ["null"])) #converts reasons list to a string separating items with commas
-    # key lookup, if it doesn't exist, return null
+# Iterate thru emotionLog key and retrieve a list of dictionaries so no error occurs if emotionlog doesn't exist
+for entry in inputFile.get("emotionLog", []): 
 
-    # READ
+    # Convert reasons list to a string separating items with commas
+    # Key lookup, if it doesn't exist, return null
+    reasons_str = ", ".join(entry.get("reasons", ["null"])) 
+
+    #--------CREATE---------
     cursor.execute("""
                INSERT INTO mood_tracker (day_of_week, date, time, intensity, emotion, category, reasons)
                VALUES(?, ?, ?, ?, ?, ?, ?)
                """, (
-                   entry["dayOfWeek"], #accessing value from entry dictionary using key
+                   entry["dayOfWeek"], # Accessing value from entry dictionary using key
                    entry["date"],
                    entry["time"],
                    entry["intensity"],
@@ -41,6 +47,9 @@ for entry in inputFile.get("emotionLog", []): #iterates through the emotionLog k
                    reasons_str
     ))
 
+#-------------------------------------SEARCH-------------------------------------------
+
+# Returns most frequent day(s) of the week associated with the given emotion
 def highestFreqEmotionDay(emotion):
     query = """
     WITH EmotionCounts AS (
@@ -55,11 +64,12 @@ def highestFreqEmotionDay(emotion):
     FROM EmotionCounts
     WHERE count = (SELECT MAX(count) FROM EmotionCounts);
     """
-    #EmotionCounts = a temporary table that exists only for query
+    # EmotionCounts = a temporary table that exists only for query
     # selects day_of_week and counting occurences of each day and storing in count column
     # data comes from mood_tracker table
     # filtering only the rows that match the input (?) emotion
     # Group By day_of_week - combines all the rows that have same day_of_week value (counting how often each day appears)
+    
     cursor.execute(query, (emotion, ))
     result = cursor.fetchall()
 
@@ -133,7 +143,7 @@ print(mostFrequentDays)
 #for row in entries:
     #print(row)
 
-# committing and closing database
+# Commit and close database
 conn.commit()
 conn.close()
 
