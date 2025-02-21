@@ -1,6 +1,7 @@
 import eel
 import sqlite3
 import json
+from datetime import datetime
 
 # Connect to database
 conn = sqlite3.connect("emotion.db")
@@ -84,37 +85,41 @@ print(mostFrequentDays)
 
 #---------------------------------------
 #SQLite built in function strftime('%m, date_column) lets you extract month from a date
+#strftime expects to parse date time object that is YYYY MM and DD format
 # SQL CASE Statements are similar to if then statements WHEN/THEN
 # EX. 09, 10, 11 is Fall and etc
 # Count(*) counts the total occurrences for each season
 # Filtering with rows that contain the input emotion
 # Group By combines all rows containing the same seasons into one count
-# def highestFreqEmotionSeason(emotion):
-#     query = """
-#     WITH SeasonCounts AS (
-#         SELECT
-#             CASE
-#                 WHEN strftime('%m', date) IN ('09', '10', '11') THEN 'Fall'
-#                 WHEN strftime('%m', date) IN ('12', '01', '02') THEN 'Winter'
-#                 WHEN strftime('%m', date) IN ('03', '04', '05') THEN 'Spring'
-#                 WHEN strftime('%m', date) IN ('06', '07', '08') THEN 'Summer'
-#             END AS season,
-#             COUNT(*) AS count
-#         FROM mood_tracker
-#         WHERE emotion = ?
-#         GROUP BY season
-#     )
-#     SELECT season
-#     FROM SeasonCounts
-#     WHERE count = (SELECT MAX(count) FROM SeasonCounts);
-#     """
-#     cursor.execute(query, (emotion,))
-#     result = cursor.fetchall()
-#     return result
+def highestFreqEmotionSeason(emotion):
+    query = """
+    WITH SeasonCounts AS (
+        SELECT
+            CASE
+                WHEN strftime('%m', date) IN ('09', '10', '11') THEN 'Fall'
+                WHEN strftime('%m', date) IN ('12', '01', '02') THEN 'Winter'
+                WHEN strftime('%m', date) IN ('03', '04', '05') THEN 'Spring'
+                WHEN strftime('%m', date) IN ('06', '07', '08') THEN 'Summer'
+            END AS season,
+            COUNT(*) AS count
+        FROM mood_tracker
+        WHERE emotion = ?
+        GROUP BY season
+    )
+    SELECT season
+    FROM SeasonCounts
+    WHERE count = (SELECT MAX(count) FROM SeasonCounts);
+    """
+    cursor.execute(query, (emotion, ))
+    result = cursor.fetchall()
+    if result:
+        return [row[0] for row in result]
+    else:
+        return ["No matching data"]
 
-# emotion = 'content'
-# mostFrequentSeason = highestFreqEmotionSeason(emotion)
-# print(mostFrequentSeason)
+emotion = "Content"
+mostFrequentSeason = highestFreqEmotionSeason(emotion)
+print(mostFrequentSeason)
 
 
 # ------------------------------
