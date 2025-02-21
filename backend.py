@@ -72,6 +72,41 @@ emotion = "Content"
 mostFrequentDays = highestFreqEmotionDay(emotion)
 print(mostFrequentDays)
 
+#---------------------------------------
+#SQLite built in function strftime('%m, date_column) lets you extract month from a date
+# SQL CASE Statements are similar to if then statements WHEN/THEN
+# EX. 09, 10, 11 is Fall and etc
+# Count(*) counts the total occurrences for each season
+# Filtering with rows that contain the input emotion
+# Group By combines all rows containing the same seasons into one count
+# def highestFreqEmotionSeason(emotion):
+#     query = """
+#     WITH SeasonCounts AS (
+#         SELECT
+#             CASE
+#                 WHEN strftime('%m', date) IN ('09', '10', '11') THEN 'Fall'
+#                 WHEN strftime('%m', date) IN ('12', '01', '02') THEN 'Winter'
+#                 WHEN strftime('%m', date) IN ('03', '04', '05') THEN 'Spring'
+#                 WHEN strftime('%m', date) IN ('06', '07', '08') THEN 'Summer'
+#             END AS season,
+#             COUNT(*) AS count
+#         FROM mood_tracker
+#         WHERE emotion = ?
+#         GROUP BY season
+#     )
+#     SELECT season
+#     FROM SeasonCounts
+#     WHERE count = (SELECT MAX(count) FROM SeasonCounts);
+#     """
+#     cursor.execute(query, (emotion,))
+#     result = cursor.fetchall()
+#     return result
+
+# emotion = 'content'
+# mostFrequentSeason = highestFreqEmotionSeason(emotion)
+# print(mostFrequentSeason)
+
+
 # ------------------------------
 #commented out SQL testing code
 #def highestDayFreqEmotion():
