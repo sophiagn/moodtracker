@@ -1,6 +1,7 @@
 import eel
 import sqlite3
 import json
+import datetime
 from datetime import datetime
 
 #created an empty database - CREATE
@@ -20,6 +21,10 @@ cursor.execute("""
                )
             """)  #Table contains 7 columns, day of week, date, time, (emotion) intensity, emotion, category, reasons
 
+#converting 12 hour time to 24 hour time, sql needs it to be in this format 
+def convertTimeFormat(timeString):
+    return datetime.strptime(timeString, "%I:%M %p").strftime("%H:%M:%S")
+
 #opens and reads the JSON file
 with open("jsonSample.txt", "r") as input:
     inputFile = json.load(input)
@@ -35,7 +40,7 @@ for entry in inputFile.get("emotionLog", []): #iterates through the emotionLog k
                """, (
                    entry["dayOfWeek"], #accessing value from entry dictionary using key
                    entry["date"],
-                   entry["time"],
+                   convertTimeFormat(entry["time"]),
                    entry["intensity"],
                    entry["emotion"],
                    entry["category"],
@@ -107,10 +112,46 @@ def highestFreqEmotionSeason(emotion):
     else:
         return ["No matching data"]
 
-emotion = "Content"
+emotion = "Stressed"
 mostFrequentSeason = highestFreqEmotionSeason(emotion)
 print(mostFrequentSeason)
 
+#-------------------------------
+
+def highestFreqEmotionTime(emotion): 
+    query = """
+    WITH TimeCounts AS (
+        SELECT
+            CASE 
+                WHEN strftime('%H', time) BETWEEN '06' AND '09' THEN 'Morning'
+                WHEN strftime('%H', time) BETWEEN '10' AND '11' THEN 'Late Morning'
+                WHEN strftime('%H', time) BETWEEN '12' AND '15' THEN 'Afternoon'
+                WHEN strftime('%H', time) BETWEEN '16' AND '17' THEN 'Early Evening'
+                WHEN strftime('%H', time) BETWEEN '18' AND '20' THEN 'Evening'
+                WHEN strftime('%H', time) BETWEEN '21' AND '00' THEN 'Night'
+                WHEN strftime('%H', time) BETWEEN '01' AND '03' THEN 'Late Night'
+                WHEN strftime('%H', time) BETWEEN '04' AND '05' THEN 'Early Morning'
+            END AS time_categories,
+            COUNT(*) AS count
+        FROM mood_tracker
+        WHERE emotion = ?
+        GROUP BY time_categories
+    )
+    SELECT time_categories
+    FROM TimeCounts
+    WHERE count = (SELECT MAX(count) FROM TimeCounts);
+    """
+    cursor.execute(query, (emotion,) )
+    result = cursor.fetchall()
+    
+    if result:
+        return [row[0] for row in result]
+    else:
+        return ["No matching data"]
+
+emotion = 'Stressed'
+mostFrequentTimeCategory = highestFreqEmotionTime(emotion)
+print(mostFrequentTimeCategory)
 
 # ------------------------------
 #commented out SQL testing code
