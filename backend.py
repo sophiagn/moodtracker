@@ -171,6 +171,27 @@ def intensityOverall():
 averageIntensity = intensityOverall()
 print(averageIntensity)
 
+#-------------------------------
+
+def intensityOverallDay(day_of_week):
+    query = """
+        SELECT
+            AVG(intensity)
+    FROM mood_tracker
+    WHERE day_of_week = ?     
+    """
+    cursor.execute(query, (day_of_week,) )
+    result = cursor.fetchone()
+
+    if result:
+        return [round(result[0], 4)] 
+    else:
+        return 0
+    
+day_of_week = 'Monday'
+dayIntensity = intensityOverallDay(day_of_week)
+print(dayIntensity)
+
 
 #commented out SQL testing code
 #def highestDayFreqEmotion():
