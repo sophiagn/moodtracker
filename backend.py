@@ -119,18 +119,17 @@ print(mostFrequentSeason)
 #-------------------------------
 
 def highestFreqEmotionTime(emotion): 
-    query = """
-    WITH TimeCounts AS (
+    query = """ WITH TimeCounts AS (
         SELECT
             CASE 
-                WHEN strftime('%H', time) BETWEEN '06' AND '09' THEN 'Morning'
-                WHEN strftime('%H', time) BETWEEN '10' AND '11' THEN 'Late Morning'
-                WHEN strftime('%H', time) BETWEEN '12' AND '15' THEN 'Afternoon'
-                WHEN strftime('%H', time) BETWEEN '16' AND '17' THEN 'Early Evening'
-                WHEN strftime('%H', time) BETWEEN '18' AND '20' THEN 'Evening'
-                WHEN strftime('%H', time) BETWEEN '21' AND '00' THEN 'Night'
-                WHEN strftime('%H', time) BETWEEN '01' AND '03' THEN 'Late Night'
-                WHEN strftime('%H', time) BETWEEN '04' AND '05' THEN 'Early Morning'
+                WHEN strftime('%H:%M', time) BETWEEN '06:00' AND '09:59' THEN 'Morning'
+                WHEN strftime('%H:%M', time) BETWEEN '10:00' AND '11:59' THEN 'Late Morning'
+                WHEN strftime('%H:%M', time) BETWEEN '12:00' AND '15:59' THEN 'Afternoon'
+                WHEN strftime('%H:%M', time) BETWEEN '16:00' AND '17:59' THEN 'Early Evening'
+                WHEN strftime('%H:%M', time) BETWEEN '18:00' AND '20:59' THEN 'Evening'
+                WHEN strftime('%H:%M', time) BETWEEN '21:00' AND '23:59' THEN 'Night'
+                WHEN strftime('%H:%M', time) BETWEEN '00:00' AND '03:59' THEN 'Late Night'
+                WHEN strftime('%H:%M', time) BETWEEN '04:00' AND '05:59' THEN 'Early Morning'
             END AS time_categories,
             COUNT(*) AS count
         FROM mood_tracker
@@ -149,7 +148,7 @@ def highestFreqEmotionTime(emotion):
     else:
         return ["No matching data"]
 
-emotion = 'Stressed'
+emotion = 'Content'
 mostFrequentTimeCategory = highestFreqEmotionTime(emotion)
 print(mostFrequentTimeCategory)
 
