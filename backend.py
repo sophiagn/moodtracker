@@ -153,6 +153,25 @@ mostFrequentTimeCategory = highestFreqEmotionTime(emotion)
 print(mostFrequentTimeCategory)
 
 # ------------------------------
+
+def intensityOverall():
+    query = """
+        SELECT
+            AVG(intensity)
+        FROM mood_tracker
+    """
+    cursor.execute(query)
+    result = cursor.fetchall()
+
+    if result:
+        return [round(row[0], 4) for row in result] #rounding values in the list
+    else:
+        return 0
+
+averageIntensity = intensityOverall()
+print(averageIntensity)
+
+
 #commented out SQL testing code
 #def highestDayFreqEmotion():
 #    query = """
