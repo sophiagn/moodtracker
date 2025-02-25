@@ -1,10 +1,16 @@
 import eel
 import sqlite3
 import json
+import os
 from datetime import datetime
 
-# Connect to database
-conn = sqlite3.connect("emotion.db")
+
+db_path = os.path.abspath("emotion.db")
+print(f"Database path: {db_path}")
+
+conn = sqlite3.connect(db_path)
+# # Connect to database
+# conn = sqlite3.connect("emotion.db")
 
 # Cursor object allows database traversal
 cursor = conn.cursor() 
@@ -47,6 +53,7 @@ for entry in inputFile.get("emotionLog", []):
                    entry["category"],
                    reasons_str
     ))
+
 
 #-------------------------------------SEARCH-------------------------------------------
 
@@ -148,8 +155,14 @@ print(mostFrequentSeason)
 #for row in entries:
     #print(row)
 
+# Delete all records from the table before exiting
+cursor.execute("DELETE FROM mood_tracker")
+
+
+
 # Commit and close database
 conn.commit()
+
 conn.close()
 
 eel.init('frontend')
