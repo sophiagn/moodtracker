@@ -8,7 +8,7 @@ from datetime import datetime
 conn = sqlite3.connect("emotion.db")
 cursor = conn.cursor() # cursor object that allows us to traverse our database, and cursor.execute to interact with database via sql request
 
-#only creates table when it doesn't exist
+#unique only adds unique values to the table
 cursor.execute("""
                CREATE TABLE IF NOT EXISTS mood_tracker ( 
                     day_of_week TEXT, 
@@ -17,8 +17,9 @@ cursor.execute("""
                     intensity INTEGER, 
                     emotion TEXT,
                     category TEXT, 
-                    reasons TEXT
-               )
+                    reasons TEXT,
+                    UNIQUE(date, time, emotion) 
+               );
             """)  #Table contains 7 columns, day of week, date, time, (emotion) intensity, emotion, category, reasons
 
 #converting 12 hour time to 24 hour time, sql needs it to be in this format 
@@ -35,7 +36,7 @@ for entry in inputFile.get("emotionLog", []): #iterates through the emotionLog k
 
     # READ
     cursor.execute("""
-               INSERT INTO mood_tracker (day_of_week, date, time, intensity, emotion, category, reasons)
+               INSERT OR IGNORE INTO mood_tracker (day_of_week, date, time, intensity, emotion, category, reasons)
                VALUES(?, ?, ?, ?, ?, ?, ?)
                """, (
                    entry["dayOfWeek"], #accessing value from entry dictionary using key
