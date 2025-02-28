@@ -22,6 +22,27 @@ cursor.execute("""
                );
             """)  #Table contains 7 columns, day of week, date, time, (emotion) intensity, emotion, category, reasons
 
+def saveToJson(moodJSON):
+    try:
+        moodEntry = json.loads(moodJSON) #json.load() is a JSON parsing method in python
+
+        #make sure current jsonSample.txt is readable
+        try:
+            with open("jsonSample.txt", "r") as file:
+                data = json.load(file)
+        except (FileNotFoundError):
+            data = {"emotion": []} # initialize if the file is missing
+    
+        data["emotionLog"].append(moodEntry)
+        with open("jsonSample.txt", "w") as file:
+            json.dump(data, file, indent=4)
+        
+        print("Data saved successfully!")
+        return "Success"
+    except Exception as e: # general try catch error block
+        print(f"Error saving to JSON: {e}")
+        return "Failed"
+
 #converting 12 hour time to 24 hour time, sql needs it to be in this format 
 def convertTimeFormat(timeString):
     return datetime.strptime(timeString, "%I:%M %p").strftime("%H:%M:%S")
