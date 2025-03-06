@@ -8,7 +8,7 @@ function updateEmotions() {
         "Bad": ["Stressed", "Angry", "Annoyed", "Disappointed", "Disgusted", "Embarrassed", "Sad", "Dreadful", "Anxious"]
     };
  
-
+    //fixed an issue
     emotionDropdown.innerHTML = "<option value=''>Select an Emotion</option>";
 
     if(category in emotions){
@@ -16,6 +16,7 @@ function updateEmotions() {
             let option = document.createElement("option");
             option.value = emotion;
             option.textContent = emotion;
+            // fixed an error here
             emotionDropdown.appendChild(option);
         });
     }
