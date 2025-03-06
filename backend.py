@@ -5,15 +5,9 @@ import os
 from datetime import datetime
 
 
-db_path = os.path.abspath("emotion.db")
-# print(f"Database path: {db_path}")
+conn = sqlite3.connect("emotion.db")
+cursor = conn.cursor() # cursor object that allows us to traverse our database, and cursor.execute to interact with database via sql request
 
-conn = sqlite3.connect(db_path)
-# # Connect to database
-# conn = sqlite3.connect("emotion.db")
-
-# Cursor object allows database traversal
-cursor = conn.cursor() 
 
 # Create table if it doesn't exist already
 # cursor.execute to interact with database via sql request
