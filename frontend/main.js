@@ -1,22 +1,22 @@
 function updateEmotions() {
-    const category = document.querySelector(".mycategory");
-    const emotionDropDown = document.querySelector(".emotion");
-
-    // creating an emotions object
+    const category = document.getElementById("category").value;
+    const emotionDropdown = document.getElementById("emotion");
+  
     const emotions = {
-        "Good": ["Joyful", "Content", "Excited", "Loved", "Confident", "Graceful", "Proud", "Energetic"],
+        "Good": ["Joyful", "Content", "Excited", "Loved", "Confident", "Grateful", "Proud", "Energetic"],
         "Neutral": ["Indifferent", "Bored", "Distant", "Calm"],
         "Bad": ["Stressed", "Angry", "Annoyed", "Disappointed", "Disgusted", "Embarrassed", "Sad", "Dreadful", "Anxious"]
     };
+ 
 
-    //emotionDropDown.innerHTML = "<option value=''>Select an Emotion</option>";
+    emotionDropdown.innerHTML = "<option value=''>Select an Emotion</option>";
 
     if(category in emotions){
         emotions[category].forEach(emotion => {
             let option = document.createElement("option");
             option.value = emotion;
             option.textContent = emotion;
-            emotionDropDown.apppendChild(option);
+            emotionDropdown.appendChild(option);
         });
     }
 }
@@ -24,7 +24,8 @@ function updateEmotions() {
 async function saveMoodData(){
     let moodEntry = {
         dayOfWeek: new Date().toLocaleString('en-us', { weekday: 'long'}),
-        date: new Date.toISOString().split("T")[0], // YYYY-MM-DD
+        // fixed error here
+        date: new Date().toISOString().split("T")[0], // YYYY-MM-DD
         time: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", hour12: true }),
         intensity: document.getElementById("intensity").value,
         emotion: document.getElementById("emotion").value,

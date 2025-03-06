@@ -22,6 +22,8 @@ cursor.execute("""
                );
             """)  #Table contains 7 columns, day of week, date, time, (emotion) intensity, emotion, category, reasons
 
+# fixed error here
+@eel.expose #exposing the function to main.js
 def saveToJson(moodJSON):
     try:
         moodEntry = json.loads(moodJSON) #json.load() is a JSON parsing method in python
@@ -31,10 +33,10 @@ def saveToJson(moodJSON):
             with open("jsonSample.txt", "r") as file:
                 data = json.load(file)
         except (FileNotFoundError):
-            data = {"emotion": []} # initialize if the file is missing
+            data = {"emotionLog": []} # initialize if the file is missing
     
         data["emotionLog"].append(moodEntry)
-        with open("jsonSample.txt", "w") as file:
+        with open("jsonSample.txt", "w") as file: #open and write into the jsonSample.txt file
             json.dump(data, file, indent=4)
         
         print("Data saved successfully!")
