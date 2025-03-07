@@ -81,6 +81,9 @@ for entry in inputFile.get("emotionLog", []): #iterates through the emotionLog k
 
 @eel.expose
 def highestFreqEmotionDay(emotion):
+    conn = sqlite3.connect("emotion.db")
+    cursor = conn.cursor()
+
     query = """
     WITH EmotionCounts AS (
         SELECT
@@ -157,6 +160,8 @@ print(mostFrequentSeason)
 
 
 def highestFreqEmotionTime(emotion):
+    conn = sqlite3.connect("emotion.db")
+    cursor = conn.cursor() 
     query = """ WITH TimeCounts AS (
         SELECT
             CASE
