@@ -3,12 +3,12 @@ import sqlite3
 import json
 import datetime
 from datetime import datetime
+import os
 
 
 #created an empty database - CREATE
 conn = sqlite3.connect("emotion.db")
 cursor = conn.cursor() # cursor object that allows us to traverse our database, and cursor.execute to interact with database via sql request
-
 
 #unique only adds unique values to the table
 cursor.execute("""
@@ -30,7 +30,6 @@ cursor.execute("""
 def saveToJson(moodJSON):
     try:
         moodEntry = json.loads(moodJSON) #json.load() is a JSON parsing method in python
-
 
         #make sure current jsonSample.txt is readable
         try:
@@ -64,7 +63,6 @@ for entry in inputFile.get("emotionLog", []): #iterates through the emotionLog k
     reasons_str = ", ".join(entry.get("reasons", ["null"])) #converts reasons list to a string separating items with commas
     # key lookup, if it doesn't exist, return null
 
-
     # READ
     cursor.execute("""
                INSERT OR IGNORE INTO mood_tracker (day_of_week, date, time, intensity, emotion, category, reasons)
@@ -79,8 +77,12 @@ for entry in inputFile.get("emotionLog", []): #iterates through the emotionLog k
                    reasons_str
     ))
 
+# Returns most frequent day(s) of the week associated with the given emotion
 @eel.expose
 def highestFreqEmotionDay(emotion):
+    conn = sqlite3.connect("emotion.db")
+    cursor = conn.cursor()
+
     query = """
     WITH EmotionCounts AS (
         SELECT
@@ -111,7 +113,6 @@ def highestFreqEmotionDay(emotion):
 emotion = "Content"
 mostFrequentDays = highestFreqEmotionDay(emotion)
 print(mostFrequentDays)
-
 
 #---------------------------------------
 #SQLite built in function strftime('%m, date_column) lets you extract month from a date
@@ -147,16 +148,15 @@ def highestFreqEmotionSeason(emotion):
     else:
         return ["No matching data"]
 
-
 emotion = "Stressed"
 mostFrequentSeason = highestFreqEmotionSeason(emotion)
 print(mostFrequentSeason)
 
-
 #-------------------------------
 
-
 def highestFreqEmotionTime(emotion):
+    conn = sqlite3.connect("emotion.db")
+    cursor = conn.cursor() 
     query = """ WITH TimeCounts AS (
         SELECT
             CASE
@@ -191,9 +191,7 @@ emotion = 'Content'
 mostFrequentTimeCategory = highestFreqEmotionTime(emotion)
 print(mostFrequentTimeCategory)
 
-
 # ------------------------------
-
 
 def intensityOverall():
     query = """
@@ -217,38 +215,6 @@ print(averageIntensity)
 
 #-------------------------------
 
-def intensityOverallSeason(emotion, season):
-    # Map seasons to their corresponding months
-    season_months = {
-        "Fall": ["09", "10", "11"],
-        "Winter": ["12", "01", "02"],
-        "Spring": ["03", "04", "05"],
-        "Summer": ["06", "07", "08"]
-    }
-
-    # Get the months for the specified season
-    months = season_months.get(season, [])
-    if not months:
-        print(f"Invalid season: {season}")
-        return
-
-    # Create a SQL query to calculate the average intensity for the emotion during the season
-    query = """
-        SELECT AVG(intensity)
-        FROM mood_tracker
-        WHERE emotion = ?
-        AND strftime('%m', time) IN ({});
-    """.format(",".join("?" * len(months)))
-
-    # Execute the query with the emotion and months as parameters
-    cursor.execute(query, (emotion, *months))
-    result = cursor.fetchone()
-
-    # Display the result
-    if result and result[0] is not None:
-        print(f"Average intensity for {emotion} during {season}: {round(result[0], 2)}")
-    else:
-        print(f"No data available for {emotion} during {season}")
 
 def intensityOverallDay(day_of_week):
     query = """
@@ -270,6 +236,8 @@ day_of_week = 'Monday'
 dayIntensity = intensityOverallDay(day_of_week)
 print(dayIntensity)
 
+# --------------------------------------
+# Intensity Overall Time 
 
 def intensityOverallTime(emotion, time):
 
@@ -307,6 +275,41 @@ time = "Afternoon"
 average_intensity = intensityOverallTime(emotion, time)
 print(average_intensity)
 
+# ----------------------------------------
+
+def intensityOverallSeason(emotion, season):
+    # Map seasons to their corresponding months
+    season_months = {
+        "Fall": ["09", "10", "11"],
+        "Winter": ["12", "01", "02"],
+        "Spring": ["03", "04", "05"],
+        "Summer": ["06", "07", "08"]
+    }
+
+    # Get the months for the specified season
+    months = season_months.get(season, [])
+    if not months:
+        print(f"Invalid season: {season}")
+        return
+
+    # Create a SQL query to calculate the average intensity for the emotion during the season
+    query = """
+        SELECT AVG(intensity)
+        FROM mood_tracker
+        WHERE emotion = ?
+        AND strftime('%m', time) IN ({});
+    """.format(",".join("?" * len(months)))
+
+    # Execute the query with the emotion and months as parameters
+    cursor.execute(query, (emotion, *months))
+    result = cursor.fetchone()
+
+    # Display the result
+    if result and result[0] is not None:
+        print(f"Average intensity for {emotion} during {season}: {round(result[0], 2)}")
+    else:
+        print(f"No data available for {emotion} during {season}")
+
 def intensityByDay(emotion, day_of_week):
     # Map day of the week to its corresponding SQLite strftime format
     day_mapping = {
@@ -342,7 +345,6 @@ def intensityByDay(emotion, day_of_week):
         print(f"Average intensity for {emotion} on {day_of_week}: {round(result[0], 2)}")
     else:
         print(f"No data available for {emotion} on {day_of_week}")
-
 
 def intensityByTimeWithCase(emotion, time_of_day):
     # Create a SQL query to calculate the average intensity for the emotion during the specified time category
@@ -413,28 +415,6 @@ def intensityBySeason(emotion, season):
     else:
         print(f"No data available for {emotion} during {season}")
 
-
-#commented out SQL testing code
-#def highestDayFreqEmotion():
-#    query = """
-#    SELECT day_of_week FROM mood_tracker
-#    WHERE emotion = 'Content'
-#    """
-#    return query
-
-
-#SQlite cursor.execute() requires a tuple or list for query paramaters, so , after emotion
-#mostFrequentDay = cursor.execute(highestDayFreqEmotion()).fetchall() #fetchone() returns a tuple with a single value from the first matching row
-#if mostFrequentDay:
-#    for day in mostFrequentDay:
-#        print(day[0]) # index 0 accesses the first element in the tuple
-#else:
-#    print("No data found") # error handling in the case that there isn't a match
-# ---------------------------------
-
-
-
-
 #testing
 #cursor.execute("SELECT * from mood_tracker")
 #entries = cursor.fetchall()
@@ -442,19 +422,8 @@ def intensityBySeason(emotion, season):
 #for row in entries:
     #print(row)
 
-
-# committing and closing database
 conn.commit()
 conn.close()
 
-
 eel.init('frontend')
 eel.start('main.html')
-
-
-
-
-
-
-
-
