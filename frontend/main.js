@@ -78,8 +78,9 @@ async function saveMoodData(){
 }
 
  async function fetchMostFrequentEmotionDay(emotion) { 
-    alert("Most frequent days:", emotion);
-    let result = await eel.highestFreqEmotionDay(emotion)(); alert("Most frequent days:", result); 
+
+    let result = await eel.highestFreqEmotionDay(emotion)(); alert("Most frequent days:"+ result); 
+
     }
 
 function getDateTime(){
