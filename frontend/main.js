@@ -83,6 +83,27 @@ async function saveMoodData(){
 
     }
 
+    async function fetchMostFrequentEmotionTime(emotion) { 
+
+        let result = await eel.highestFreqEmotionTime(emotion)(); alert("Most frequent time:"+ result); 
+    
+        }
+    async function fetchMostFrequentEmotionSeason(emotion) { 
+
+        let result = await eel.highestFreqEmotionSeason(emotion)(); alert("Most frequent season:"+ result); 
+        
+        }
+    async function fetchIntensity() { 
+
+        let result = await eel.intensityOverall()(); alert("Intensity Overall: "+ result +"/5"); 
+            
+        }
+    async function fetchIntensitybyTime(emotion, time) { 
+
+        let result = await eel.intensityOverallTime(emotion, time); alert("Intensity Overall at " +time+ ":" + result +"/5"); 
+                
+    }
+
 function getDateTime(){
     
     let now = new Date();
