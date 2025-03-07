@@ -113,7 +113,7 @@ def highestFreqEmotionDay(emotion):
     result = cursor.fetchall()
 
 
-    if result:
+    if result and result[0] is not None:
         return [row[0] for row in result]
     else:
         return["No matching data"]
@@ -151,7 +151,7 @@ def highestFreqEmotionSeason(emotion):
     """
     cursor.execute(query, (emotion, ))
     result = cursor.fetchall()
-    if result:
+    if result and result[0] is not None:
         return [row[0] for row in result]
     else:
         return ["No matching data"]
@@ -189,7 +189,7 @@ def highestFreqEmotionTime(emotion):
     cursor.execute(query, (emotion,) )
     result = cursor.fetchall()
    
-    if result:
+    if result and result[0] is not None:
         return [row[0] for row in result]
     else:
         return ["No matching data"]
@@ -211,10 +211,10 @@ def intensityOverall():
     result = cursor.fetchall()
 
 
-    if result:
+    if result and result[0] is not None:
         return [round(row[0], 4) for row in result] #rounding values in the list
     else:
-        return 0
+        return [0.0]
 
 
 averageIntensity = intensityOverall()
@@ -235,7 +235,7 @@ def intensityOverallDay(day_of_week):
     result = cursor.fetchone()
 
 
-    if result:
+    if result and result[0] is not None:
         return [round(result[0], 4)]
     else:
         return 0
