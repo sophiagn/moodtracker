@@ -6,6 +6,7 @@
     </style>
     <title>Tab 2</title>
     <link rel="stylesheet" href="style.css">
+    <script type = "text/javascript" src="eel.js"></script>
 </head>
 <body>
     <div class="tab2-content"> 
@@ -16,7 +17,7 @@
             <select id="mainDropdown">
                 <option value="">-- Select --</option>
                 <option value="option1">What days am I most likely to feel ____?</option>
-                <option value="option2">What day of the week am I most likely to feel ____?</option>
+                <option value="option2">What time of day am I most likely to feel happy?</option>
                 <option value="option3">What time of year am I most likely to feel ____?</option>
                 <option value="option4">What days am I most likely to feel ____?</option>
             </select>
@@ -25,33 +26,32 @@
         <!-- Container for buttons based on options -->
         <div id="buttonContainer1" class="hidden">
             <button2 onclick='fetchMostFrequentEmotionDay("Joyful")'>Joyful</button2>
-            <button45 onclick="fetchMostFrequentEmotionDay(Content)">Content</button45>
-            <button3>Excited</button3>
-            <button4>Loved</button4>
-            <button5>Confident</button5>
-            <button6>Graceful</button6>
-            <button7>Proud</button7>
-            <button8>Energetic</button8>
-            <button9>Graceful</button9>
+            <button45 onclick='fetchMostFrequentEmotionDay("Content")'>Content</button45>
+            <button3 onclick='fetchMostFrequentEmotionDay("Excited")'>Excited</button3>
+            <button4 onclick='fetchMostFrequentEmotionDay("Loved")'>Loved</button4>
+            <button5 onclick='fetchMostFrequentEmotionDay("Confident")'>Confident</button5>
+            <button6 onclick='fetchMostFrequentEmotionDay("Graceful")'>Graceful</button6>
+            <button7 onclick='fetchMostFrequentEmotionDay("Proud")'>Proud</button7>
+            <button8 onclick='fetchMostFrequentEmotionDay("Energetic")'>Energetic</button8>
 
-            <button10>Indifferent</button10>
-            <button11>Bored</button11>
-            <button12>Distant</button12>
-            <button13>Calm</button13>
+            <button10 onclick='fetchMostFrequentEmotionDay("Indifferent")'>Indifferent</button10>
+            <button11 onclick='fetchMostFrequentEmotionDay("Bored")'>Bored</button11>
+            <button12 onclick='fetchMostFrequentEmotionDay("Distant")'>Distant</button12>
+            <button13 onclick='fetchMostFrequentEmotionDay("Calm")'>Calm</button13>
 
-            <button14>Stressed</button14>
-            <button15>Angry</button15>
-            <button16>Annoyed</button16>
-            <button17>Dissapointed</button17>
-            <button18>Disgusted</button18>
-            <button19>Embarrased</button19>
-            <button20>Sad</button20>
-            <button21>Dreadful</button21>
-            <button22>Anxious</button22>
+            <button14 onclick='fetchMostFrequentEmotionDay("Stressed")'>Stressed</button14>
+            <button15 onclick='fetchMostFrequentEmotionDay("Angry")'>Angry</button15>
+            <button16 onclick='fetchMostFrequentEmotionDay("Annoyed")'>Annoyed</button16>
+            <button17 onclick='fetchMostFrequentEmotionDay("Dissapointed")'>Dissapointed</button17>
+            <button18 onclick='fetchMostFrequentEmotionDay("Disgusted")'>Disgusted</button18>
+            <button19 onclick='fetchMostFrequentEmotionDay("Embarrased")'>Embarrased</button19>
+            <button20 onclick='fetchMostFrequentEmotionDay("Sad")'>Sad</button20>
+            <button21 onclick='fetchMostFrequentEmotionDay("Dreadful")'>Dreadful</button21>
+            <button22 onclick='fetchMostFrequentEmotionDay("Anxious")'>Anxious</button22>
         </div>
     
         <div id="buttonContainer2" class="hidden">
-            <button23>Joyful</button23>
+            <button23 onclick='fetchMostFrequentEmotionTime("Joyful")'>Joyful</button23>
             <button24>Content</button24>
             <button25>Excited</button25>
             <button26>Loved</button26>
