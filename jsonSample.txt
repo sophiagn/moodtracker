@@ -1,0 +1,299 @@
+{
+    "emotionLog": [
+        {
+            "dayOfWeek": "Wednesday",
+            "date": "2025-07-05",
+            "time": "12:42 PM",
+            "intensity": 4,
+            "emotion": "Stressed",
+            "category": "Bad",
+            "reasons": [
+                "Work",
+                "Thoughts about the future",
+                "Mental disorder"
+            ]
+        },
+        {
+            "dayOfWeek": "Monday",
+            "date": "2025-09-02",
+            "time": "3:15 PM",
+            "intensity": 2,
+            "emotion": "Anxious",
+            "category": "Bad",
+            "reasons": [
+                "Physical health",
+                "Thoughts about the past",
+                "Myself"
+            ]
+        },
+        {
+            "dayOfWeek": "Tuesday",
+            "date": "2025-03-12",
+            "time": "5:30 PM",
+            "intensity": 5,
+            "emotion": "Joyful",
+            "category": "Good",
+            "reasons": [
+                "Friends",
+                "Partner",
+                "Family"
+            ]
+        },
+        {
+            "dayOfWeek": "Friday",
+            "date": "2025-12-02",
+            "time": "7:45 PM",
+            "intensity": 3,
+            "emotion": "Calm",
+            "category": "Neutral",
+            "reasons": [
+                "School",
+                "Work",
+                "Thoughts about the future"
+            ]
+        },
+        {
+            "dayOfWeek": "Saturday",
+            "date": "2025-06-15",
+            "time": "9:20 PM",
+            "intensity": 1,
+            "emotion": "Content",
+            "category": "Good",
+            "reasons": [
+                "No reason",
+                "Myself",
+                "Unknown"
+            ]
+        },
+        {
+            "dayOfWeek": "Monday",
+            "date": "2025-12-03",
+            "time": "9:20 PM",
+            "intensity": 1,
+            "emotion": "Content",
+            "category": "Good",
+            "reasons": [
+                "No reason",
+                "Myself",
+                "Unknown"
+            ]
+        },
+        {
+            "dayOfWeek": "Monday",
+            "date": "2025-12-15",
+            "time": "9:20 PM",
+            "intensity": 1,
+            "emotion": "Content",
+            "category": "Good",
+            "reasons": [
+                "No reason",
+                "Myself",
+                "Unknown"
+            ]
+        },
+        {
+            "dayOfWeek": "Thursday",
+            "date": "2025-03-06",
+            "time": "12:00 PM",
+            "intensity": "4",
+            "emotion": "Content",
+            "category": "Good",
+            "reasons": [
+                "hj"
+            ]
+        },
+        {
+            "dayOfWeek": "Thursday",
+            "date": "2025-03-06",
+            "time": "12:39 PM",
+            "intensity": "4",
+            "emotion": "Joyful",
+            "category": "Good",
+            "reasons": [
+                "Because"
+            ]
+        },
+        {
+            "dayOfWeek": "Thursday",
+            "date": "2025-03-06",
+            "time": "12:42 PM",
+            "intensity": "4",
+            "emotion": "Joyful",
+            "category": "Good",
+            "reasons": [
+                "bc"
+            ]
+        },
+        {
+            "dayOfWeek": "Thursday",
+            "date": "2025-03-06",
+            "time": "12:43 PM",
+            "intensity": "4",
+            "emotion": "Joyful",
+            "category": "Good",
+            "reasons": [
+                "bc"
+            ]
+        },
+        {
+            "dayOfWeek": "Thursday",
+            "date": "2025-03-06",
+            "time": "12:44 PM",
+            "intensity": "5",
+            "emotion": "Joyful",
+            "category": "Good",
+            "reasons": [
+                "bc"
+            ]
+        },
+        {
+            "dayOfWeek": "Thursday",
+            "date": "2025-03-06",
+            "time": "12:52 PM",
+            "intensity": "4",
+            "emotion": "Joyful",
+            "category": "Good",
+            "reasons": [
+                "bc"
+            ]
+        },
+        {
+            "dayOfWeek": "Thursday",
+            "date": "2025-03-06",
+            "time": "06:41 PM",
+            "intensity": "4",
+            "emotion": "Joyful",
+            "category": "Good",
+            "reasons": [
+                "bc"
+            ]
+        },
+        {
+            "dayOfWeek": "Thursday",
+            "date": "2025-03-06",
+            "time": "06:45 PM",
+            "intensity": "4",
+            "emotion": "Joyful",
+            "category": "Good",
+            "reasons": [
+                "bx"
+            ]
+        },
+        {
+            "dayOfWeek": "Thursday",
+            "date": "2025-03-06",
+            "time": "06:47 PM",
+            "intensity": "4",
+            "emotion": "Joyful",
+            "category": "Good",
+            "reasons": [
+                "bc"
+            ]
+        },
+        {
+            "dayOfWeek": "Thursday",
+            "date": "2025-03-06",
+            "time": "06:52 PM",
+            "intensity": "4",
+            "emotion": "Joyful",
+            "category": "Good",
+            "reasons": [
+                "bc"
+            ]
+        }
+    ]
+=======
+  "emotionLog": [
+    {
+      "dayOfWeek": "Wednesday",
+      "date": "2025-07-05",
+      "time": "12:42 PM",
+      "intensity": 4,
+      "emotion": "Stressed",
+      "category": "Bad",
+      "reasons": [
+        "Work",
+        "Thoughts about the future",
+        "Mental disorder"
+      ]
+    },
+    {
+      "dayOfWeek": "Monday",
+      "date": "2025-09-02",
+      "time": "3:15 PM",
+      "intensity": 2,
+      "emotion": "Anxious",
+      "category": "Bad",
+      "reasons": [
+        "Physical health",
+        "Thoughts about the past",
+        "Myself"
+      ]
+    },
+    {
+      "dayOfWeek": "Tuesday",
+      "date": "2025-03-12",
+      "time": "5:30 PM",
+      "intensity": 5,
+      "emotion": "Joyful",
+      "category": "Good",
+      "reasons": [
+        "Friends",
+        "Partner",
+        "Family"
+      ]
+    },
+    {
+      "dayOfWeek": "Friday",
+      "date": "2025-12-02",
+      "time": "7:45 PM",
+      "intensity": 3,
+      "emotion": "Calm",
+      "category": "Neutral",
+      "reasons": [
+        "School",
+        "Work",
+        "Thoughts about the future"
+      ]
+    },
+    {
+      "dayOfWeek": "Saturday",
+      "date": "2025-06-15",
+      "time": "9:20 PM",
+      "intensity": 1,
+      "emotion": "Content",
+      "category": "Good",
+      "reasons": [
+        "No reason",
+        "Myself",
+        "Unknown"
+      ]
+    },
+    {
+      "dayOfWeek": "Monday",
+      "date": "2025-12-03",
+      "time": "9:20 PM",
+      "intensity": 1,
+      "emotion": "Content",
+      "category": "Good",
+      "reasons": [
+        "No reason",
+        "Myself",
+        "Unknown"
+      ]
+    },
+    {
+      "dayOfWeek": "Monday",
+      "date": "2025-12-15",
+      "time": "9:20 PM",
+      "intensity": 1,
+      "emotion": "Content",
+      "category": "Good",
+      "reasons": [
+        "No reason",
+        "Myself",
+        "Unknown"
+      ]
+    }
+  ]
+}

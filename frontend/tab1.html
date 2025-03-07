@@ -6,11 +6,42 @@
     </style>
     <title>Tab 1</title>
     <link rel="stylesheet" href="style.css">
+    <script type = "text/javascript" src="eel.js"></script>
+
 </head>
 <body>
     <div class="tab1-content">
-        <h2>Welcome to Tab 1</h2>
-        <p>This is the content of the first tab.</p>
+        <h2>How are you feeling today?</h2>
+        <p>Please choose one of the options below: </p>
+
+        <label for="category">Category:</label>
+        <select id="category" onchange="updateEmotions()">
+            <option value="">Select Category</option>
+            <option value="Good">Good</option>
+            <option value="Neutral">Neutral</option>
+            <option value="Bad">Bad</option>
+        </select><br><br>
+    
+    
+        <label for="emotion">Emotion:</label>
+        <select id="emotion">
+            <option value="">Select an Emotion</option>
+        </select><br><br>
+
+        <label for="intensity">Intensity (1-5):</label>
+    <input type="number" id="intensity" min="1" max="10"><br><br>
+   
+
+
+   
+    <label for="reasons">Reasons (comma-separated):</label>
+    <input type="text" id="reasons"><br><br>
+   
+    <button1 onclick="saveMoodData()">Save Mood Entry</button1>
+
     </div>
+
+    <script src="main.js"></script>
+
 </body>
 </html>
