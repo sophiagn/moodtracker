@@ -179,7 +179,7 @@ def highestFreqEmotionTime(emotion):
                 WHEN strftime('%H:%M', time) BETWEEN '21:00' AND '23:59' THEN 'Night'
                 WHEN strftime('%H:%M', time) BETWEEN '00:00' AND '03:59' THEN 'Late Night'
                 WHEN strftime('%H:%M', time) BETWEEN '04:00' AND '05:59' THEN 'Early Morning'
-            END AS time_categories,
+            END AS time_category,
             COUNT(*) AS count
         FROM mood_tracker
         WHERE emotion = ?
@@ -244,7 +244,7 @@ def intensityOverallDay(day_of_week):
     if result and result[0] is not None:
         return [round(result[0], 4)]
     else:
-        return 0
+        return "No data available "
    
 day_of_week = 'Monday'
 dayIntensity = intensityOverallDay(day_of_week)
@@ -253,7 +253,7 @@ print(dayIntensity)
 # --------------------------------------
 # Intensity Overall Time 
 @eel.expose
-def intensityOverallTime(emotion, time):
+def intensityOverallTime(time):
     conn = sqlite3.connect("emotion.db")
     cursor = conn.cursor()
     query = """ WITH TimeCounts AS (
@@ -270,29 +270,28 @@ def intensityOverallTime(emotion, time):
             END AS time_category,
             intensity
         FROM mood_tracker
-        WHERE emotion = ?
     )
     SELECT AVG(intensity)
     FROM TimeCounts
     WHERE time_category = ?;
     """
-    cursor.execute(query, (emotion, time) )
+    cursor.execute(query, (time,) )
     result = cursor.fetchone()
     
     if result and result[0] is not None:
-        print( f"Average intensity for {emotion} during {time}: {round(result[0], 2)}")
+       return round(result[0], 2)
     else:
-        print(f"No data available for {emotion} during {time}") 
+        print(f"No data available for {time}") 
 
 # Example usage
 emotion = "Stressed"
 time = "Afternoon"
-average_intensity = intensityOverallTime(emotion, time)
+average_intensity = intensityOverallTime(time)
 print(average_intensity)
 
 # ----------------------------------------
 @eel.expose
-def intensityOverallSeason(emotion, season):
+def intensityOverallSeason(season):
     conn = sqlite3.connect("emotion.db")
     cursor = conn.cursor()
     # Map seasons to their corresponding months
@@ -306,26 +305,24 @@ def intensityOverallSeason(emotion, season):
     # Get the months for the specified season
     months = season_months.get(season, [])
     if not months:
-        print(f"Invalid season: {season}")
-        return
+        return(f"Invalid season: {season}")
 
-    # Create a SQL query to calculate the average intensity for the emotion during the season
+    # Create a SQL query to calculate the average intensity for given season
     query = """
         SELECT AVG(intensity)
         FROM mood_tracker
-        WHERE emotion = ?
-        AND strftime('%m', time) IN ({});
-    """.format(",".join("?" * len(months)))
+        WHERE strftime('%m', date) IN ({",".join("?" * len(months))});
+    """
 
     # Execute the query with the emotion and months as parameters
-    cursor.execute(query, (emotion, *months))
+    cursor.execute(query, months)
     result = cursor.fetchone()
 
     # Display the result
     if result and result[0] is not None:
-        print(f"Average intensity for {emotion} during {season}: {round(result[0], 2)}")
+       return round(result[0], 2)
     else:
-        print(f"No data available for {emotion} during {season}")
+        return(f"No data available for during {season}")
 
 @eel.expose
 def intensityByDay(emotion, day_of_week):
@@ -345,15 +342,15 @@ def intensityByDay(emotion, day_of_week):
     # Get the numeric representation of the day of the week
     day_number = day_mapping.get(day_of_week.capitalize())
     if day_number is None:
-        print(f"Invalid day of the week: {day_of_week}")
-        return
+        return (f"Invalid day of the week: {day_of_week}")
+        
 
     # Create a SQL query to calculate the average intensity for the emotion on the specified day
     query = """
         SELECT AVG(intensity)
         FROM mood_tracker
         WHERE emotion = ?
-        AND strftime('%w', time) = ?;
+        AND strftime('%w', date) = ?;
     """
 
     # Execute the query with the emotion and day number as parameters
@@ -362,9 +359,9 @@ def intensityByDay(emotion, day_of_week):
 
     # Display the result
     if result and result[0] is not None:
-        print(f"Average intensity for {emotion} on {day_of_week}: {round(result[0], 2)}")
+        return round(result[0], 2)
     else:
-        print(f"No data available for {emotion} on {day_of_week}")
+        return "No data available "
 
 @eel.expose
 def intensityByTimeWithCase(emotion, time_of_day):
@@ -399,9 +396,9 @@ def intensityByTimeWithCase(emotion, time_of_day):
 
     # Display the result
     if result and result[0] is not None:
-        print(f"Average intensity for {emotion} during {time_of_day}: {round(result[0], 2)}")
+        return round(result[0], 2)
     else:
-        print(f"No data available for {emotion} during {time_of_day}")
+        return(f"No data available for {emotion} during {time_of_day}")
 
 # -------------------
 @eel.expose
@@ -419,26 +416,24 @@ def intensityBySeason(emotion, season):
     # Get the months for the specified season
     months = season_months.get(season)
     if not months:
-        print(f"Invalid season: {season}")
-        return
+        return (f"Invalid season: {season}")
 
     # Create a SQL query to calculate the average intensity for the emotion during the season
     query = """
         SELECT AVG(intensity)
         FROM mood_tracker
         WHERE emotion = ?
-        AND strftime('%m', time) IN ({});
-    """.format(",".join("?" * len(months)))
-
+        AND strftime('%m', date) IN ({','.join('?' * len(months))});
+    """
     # Execute the query with the emotion and months as parameters
     cursor.execute(query, (emotion, *months))
     result = cursor.fetchone()
 
     # Display the result
     if result and result[0] is not None:
-        print(f"Average intensity for {emotion} during {season}: {round(result[0], 2)}")
+        return round(result[0], 2)
     else:
-        print(f"No data available for {emotion} during {season}")
+        return(f"No data available for {emotion} during {season}")
 
 #testing
 #cursor.execute("SELECT * from mood_tracker")
