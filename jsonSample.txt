@@ -112,6 +112,39 @@
             "reasons": [
                 "Happiness"
             ]
+        },
+        {
+            "dayOfWeek": "Friday",
+            "date": "2025-03-07",
+            "time": "10:57 AM",
+            "intensity": "5",
+            "emotion": "Content",
+            "category": "Good",
+            "reasons": [
+                "Friends"
+            ]
+        },
+        {
+            "dayOfWeek": "Friday",
+            "date": "2025-03-07",
+            "time": "10:59 AM",
+            "intensity": "5",
+            "emotion": "Indifferent",
+            "category": "Neutral",
+            "reasons": [
+                "Friends"
+            ]
+        },
+        {
+            "dayOfWeek": "Friday",
+            "date": "2025-03-07",
+            "time": "01:43 PM",
+            "intensity": "4",
+            "emotion": "Content",
+            "category": "Good",
+            "reasons": [
+                "Friends"
+            ]
         }
     ]
 }
