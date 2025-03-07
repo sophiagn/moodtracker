@@ -1,7 +1,6 @@
 import eel
 import sqlite3
 import json
-import datetime
 from datetime import datetime
 import os
 
@@ -28,20 +27,46 @@ cursor.execute("""
 # fixed error here
 @eel.expose #exposing the function to main.js
 def saveToJson(moodJSON):
+    conn = sqlite3.connect("emotion.db")
+    cursor = conn.cursor()
     try:
         moodEntry = json.loads(moodJSON) #json.load() is a JSON parsing method in python
 
+        if not os.path.exists("jsonSample.txt"):
+            with open("jsonSample.txt", "w") as file:
+                json.dump({"emotionLog": []}, file)
+
         #make sure current jsonSample.txt is readable
-        try:
-            with open("jsonSample.txt", "r") as file:
+        with open("jsonSample.txt", "r") as file:
+            try:
                 data = json.load(file)
-        except (FileNotFoundError):
-            data = {"emotionLog": []} # initialize if the file is missing
+            except json.JSONDecodeError:
+                data = {"emotionLog": []} # initialize if the file is missing
    
         data["emotionLog"].append(moodEntry)
         with open("jsonSample.txt", "w") as file: #open and write into the jsonSample.txt file
             json.dump(data, file, indent=4)
-       
+        
+
+        for entry in data.get("emotionLog", []): #iterates through the emotionLog key and retrieves a list of dictionaries [] so no error occurs if emotionlog doesn't exist
+            reasons_str = ", ".join(entry.get("reasons", ["null"])) #converts reasons list to a string separating items with commas
+            # key lookup, if it doesn't exist, return null
+
+            # READ
+            cursor.execute("""
+                    INSERT OR IGNORE INTO mood_tracker (day_of_week, date, time, intensity, emotion, category, reasons)
+                    VALUES(?, ?, ?, ?, ?, ?, ?)
+                    """, (
+                        entry["dayOfWeek"], #accessing value from entry dictionary using key
+                        entry["date"],
+                        convertTimeFormat(entry["time"]),
+                        entry["intensity"],
+                        entry["emotion"],
+                        entry["category"],
+                        reasons_str
+            ))
+            conn.commit()
+
         print("Data saved successfully!")
         return "Success"
     except Exception as e: # general try catch error block
@@ -54,28 +79,11 @@ def convertTimeFormat(timeString):
     return datetime.strptime(timeString, "%I:%M %p").strftime("%H:%M:%S")
 
 
-#opens and reads the JSON file
-with open("jsonSample.txt", "r") as input:
-    inputFile = json.load(input)
-
-
-for entry in inputFile.get("emotionLog", []): #iterates through the emotionLog key and retrieves a list of dictionaries [] so no error occurs if emotionlog doesn't exist
-    reasons_str = ", ".join(entry.get("reasons", ["null"])) #converts reasons list to a string separating items with commas
-    # key lookup, if it doesn't exist, return null
-
-    # READ
-    cursor.execute("""
-               INSERT OR IGNORE INTO mood_tracker (day_of_week, date, time, intensity, emotion, category, reasons)
-               VALUES(?, ?, ?, ?, ?, ?, ?)
-               """, (
-                   entry["dayOfWeek"], #accessing value from entry dictionary using key
-                   entry["date"],
-                   convertTimeFormat(entry["time"]),
-                   entry["intensity"],
-                   entry["emotion"],
-                   entry["category"],
-                   reasons_str
-    ))
+try:
+    os.remove("jsonSample.txt")
+    print("jsonSample.txt deleted successfully.")
+except FileNotFoundError:
+    print("File not found, nothing to delete")
 
 # Returns most frequent day(s) of the week associated with the given emotion
 @eel.expose
