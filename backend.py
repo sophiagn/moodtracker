@@ -206,7 +206,7 @@ print(mostFrequentTimeCategory)
 @eel.expose
 def intensityOverall():
     conn = sqlite3.connect("emotion.db")
-    cursor = conn.cursor()
+    cursor = conn.cursor() 
     query = """
         SELECT
             AVG(intensity)
@@ -251,6 +251,7 @@ dayIntensity = intensityOverallDay(day_of_week)
 print(dayIntensity)
 
 # --------------------------------------
+
 # Intensity Overall Time 
 @eel.expose
 def intensityOverallTime(time):
@@ -364,7 +365,7 @@ def intensityByDay(emotion, day_of_week):
         return "No data available "
 
 @eel.expose
-def intensityByTimeWithCase(emotion, time_of_day):
+def intensityByTime(emotion, time_of_day):
     conn = sqlite3.connect("emotion.db")
     cursor = conn.cursor()
     # Create a SQL query to calculate the average intensity for the emotion during the specified time category
@@ -434,6 +435,11 @@ def intensityBySeason(emotion, season):
         return round(result[0], 2)
     else:
         return(f"No data available for {emotion} during {season}")
+
+
+
+
+
 
 #testing
 #cursor.execute("SELECT * from mood_tracker")
