@@ -144,9 +144,9 @@ print(mostFrequentSeason)
 # --------------------------------------
 # Intensity Overall Time 
 
-def intensityOverallTime(emotion, time):
-
-    query = """ WITH TimeCounts AS (
+def intensityOverallTime(time):
+    query = """
+    WITH TimeCounts AS (
         SELECT
             CASE 
                 WHEN strftime('%H:%M', time) BETWEEN '06:00' AND '09:59' THEN 'Morning'
@@ -160,19 +160,18 @@ def intensityOverallTime(emotion, time):
             END AS time_category,
             intensity
         FROM mood_tracker
-        WHERE emotion = ?
     )
     SELECT AVG(intensity)
     FROM TimeCounts
     WHERE time_category = ?;
     """
-    cursor.execute(query, (emotion, time) )
+    cursor.execute(query, (time,))  
     result = cursor.fetchone()
     
     if result and result[0] is not None:
-        print( f"Average intensity for {emotion} during {time}: {round(result[0], 2)}")
+        print(f"Average intensity during {time}: {round(result[0], 2)}")
     else:
-        print(f"No data available for {emotion} during {time}") 
+        print(f"No data available for {time}.")
 
 # Example usage
 emotion = "Stressed"
@@ -182,7 +181,7 @@ print(average_intensity)
 
     # ----------------------------------------
 
-def intensityOverallSeason(emotion, season):
+def intensityOverallSeason(season):
     # Map seasons to their corresponding months
     season_months = {
         "Fall": ["09", "10", "11"],
@@ -201,12 +200,11 @@ def intensityOverallSeason(emotion, season):
     query = """
         SELECT AVG(intensity)
         FROM mood_tracker
-        WHERE emotion = ?
-        AND strftime('%m', time) IN ({});
-    """.format(",".join("?" * len(months)))
+        WHERE strftime('%m', date) IN ({});
+    """.format(",".join("?" * 3))
 
     # Execute the query with the emotion and months as parameters
-    cursor.execute(query, (emotion, *months))
+    cursor.execute(query, (months))
     result = cursor.fetchone()
 
     # Display the result
