@@ -206,7 +206,7 @@ print(mostFrequentTimeCategory)
 @eel.expose
 def intensityOverall():
     conn = sqlite3.connect("emotion.db")
-    cursor = conn.cursor()
+    cursor = conn.cursor() 
     query = """
         SELECT
             AVG(intensity)
