@@ -14,30 +14,6 @@
             ]
         },
         {
-            "dayOfWeek": "Monday",
-            "date": "2025-09-02",
-            "time": "3:15 PM",
-            "intensity": 2,
-            "emotion": "Anxious",
-            "category": "Bad",
-            "reasons": [
-                "Physical health",
-                "Thoughts about the past",
-                "Myself"
-            ]
-        },
-        {
-            "dayOfWeek": "Friday",
-            "date": "2025-03-07",
-            "time": "03:02 PM",
-            "intensity": "1",
-            "emotion": "Joyful",
-            "category": "Good",
-            "reasons": [
-                "gfds"
-            ]
-        },
-        {
             "dayOfWeek": "Friday",
             "date": "2025-03-07",
             "time": "03:20 PM",
@@ -55,28 +31,6 @@
             "intensity": "5",
             "emotion": "Joyful",
             "category": "Good",
-            "reasons": [
-                ""
-            ]
-        },
-        {
-            "dayOfWeek": "Friday",
-            "date": "2025-03-07",
-            "time": "03:30 PM",
-            "intensity": "4",
-            "emotion": "Grateful",
-            "category": "Good",
-            "reasons": [
-                "3"
-            ]
-        },
-        {
-            "dayOfWeek": "Friday",
-            "date": "2025-03-07",
-            "time": "03:32 PM",
-            "intensity": "5",
-            "emotion": "Embarrassed",
-            "category": "Bad",
             "reasons": [
                 ""
             ]
