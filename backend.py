@@ -183,9 +183,9 @@ def highestFreqEmotionTime(emotion):
             COUNT(*) AS count
         FROM mood_tracker
         WHERE emotion = ?
-        GROUP BY time_categories
+        GROUP BY time_category
     )
-    SELECT time_categories
+    SELECT time_category
     FROM TimeCounts
     WHERE count = (SELECT MAX(count) FROM TimeCounts);
     """
