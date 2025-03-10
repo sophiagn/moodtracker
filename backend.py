@@ -183,9 +183,9 @@ def highestFreqEmotionTime(emotion):
             COUNT(*) AS count
         FROM mood_tracker
         WHERE emotion = ?
-        GROUP BY time_categories
+        GROUP BY time_category
     )
-    SELECT time_categories
+    SELECT time_category
     FROM TimeCounts
     WHERE count = (SELECT MAX(count) FROM TimeCounts);
     """
@@ -217,7 +217,7 @@ def intensityOverall():
 
 
     if result and result[0] is not None:
-        return [round(result[0], 4)] #rounding values in the list
+        return round(result[0], 4) #rounding values in the list
     else:
         return [0.0]
 
@@ -242,7 +242,7 @@ def intensityOverallDay(day_of_week):
 
 
     if result and result[0] is not None:
-        return [round(result[0], 4)]
+        return round(result[0], 4)
     else:
         return "No data available "
    
@@ -282,20 +282,20 @@ def intensityOverallTime(time):
     if result and result[0] is not None:
        return round(result[0], 2)
     else:
-        print(f"No data available for {time}") 
+        return [0.0]
 
 # Example usage
-emotion = "Stressed"
-time = "Afternoon"
-average_intensity = intensityOverallTime(time)
-print(average_intensity)
+#emotion = "Stressed"
+#time = "Afternoon"
+#average_intensity = intensityOverallTime(time)
+#print(average_intensity)
 
 # ----------------------------------------
 @eel.expose
 def intensityOverallSeason(season):
     conn = sqlite3.connect("emotion.db")
     cursor = conn.cursor()
-    # Map seasons to their corresponding months
+
     season_months = {
         "Fall": ["09", "10", "11"],
         "Winter": ["12", "01", "02"],
@@ -303,69 +303,50 @@ def intensityOverallSeason(season):
         "Summer": ["06", "07", "08"]
     }
 
-    # Get the months for the specified season
     months = season_months.get(season, [])
     if not months:
-        return(f"Invalid season: {season}")
+        return f"Invalid season: {season}"
 
-    # Create a SQL query to calculate the average intensity for given season
-    query = """
+    query = f"""
         SELECT AVG(intensity)
         FROM mood_tracker
-        WHERE strftime('%m', date) IN ({",".join("?" * len(months))});
+        WHERE strftime('%m', date) IN ({','.join(['?'] * len(months))});
     """
 
-    # Execute the query with the emotion and months as parameters
-    cursor.execute(query, months)
+    cursor.execute(query, tuple(months))
     result = cursor.fetchone()
 
-    # Display the result
     if result and result[0] is not None:
-       return round(result[0], 2)
+        return round(result[0], 2)
     else:
-        return(f"No data available for during {season}")
+        return 0.0  
+
 
 @eel.expose
 def intensityByDay(emotion, day_of_week):
     conn = sqlite3.connect("emotion.db")
     cursor = conn.cursor()
-    # Map day of the week to its corresponding SQLite strftime format
-    day_mapping = {
-        "Monday": "1",
-        "Tuesday": "2",
-        "Wednesday": "3",
-        "Thursday": "4",
-        "Friday": "5",
-        "Saturday": "6",
-        "Sunday": "0"
-    }
-
-    # Get the numeric representation of the day of the week
-    day_number = day_mapping.get(day_of_week.capitalize())
-    if day_number is None:
-        return (f"Invalid day of the week: {day_of_week}")
-        
 
     # Create a SQL query to calculate the average intensity for the emotion on the specified day
     query = """
         SELECT AVG(intensity)
         FROM mood_tracker
-        WHERE emotion = ?
-        AND strftime('%w', date) = ?;
+        WHERE LOWER(emotion) = LOWER(?)
+        AND day_of_week = ?;
     """
 
     # Execute the query with the emotion and day number as parameters
-    cursor.execute(query, (emotion, day_number))
+    cursor.execute(query, (emotion, day_of_week))
     result = cursor.fetchone()
 
     # Display the result
     if result and result[0] is not None:
         return round(result[0], 2)
     else:
-        return "No data available "
+        return 0.0
 
 @eel.expose
-def intensityByTime(emotion, time_of_day):
+def intensityByTime(emotion, time):
     conn = sqlite3.connect("emotion.db")
     cursor = conn.cursor()
     # Create a SQL query to calculate the average intensity for the emotion during the specified time category
@@ -392,15 +373,14 @@ def intensityByTime(emotion, time_of_day):
     """
 
     # Execute the query with the emotion and time of day as parameters
-    cursor.execute(query, (emotion, time_of_day))
+    cursor.execute(query, (emotion, time))
     result = cursor.fetchone()
 
     # Display the result
     if result and result[0] is not None:
         return round(result[0], 2)
     else:
-        return(f"No data available for {emotion} during {time_of_day}")
-
+        return 0.0
 # -------------------
 @eel.expose
 def intensityBySeason(emotion, season):
@@ -420,21 +400,21 @@ def intensityBySeason(emotion, season):
         return (f"Invalid season: {season}")
 
     # Create a SQL query to calculate the average intensity for the emotion during the season
-    query = """
+    query = f"""
         SELECT AVG(intensity)
         FROM mood_tracker
-        WHERE emotion = ?
-        AND strftime('%m', date) IN ({','.join('?' * len(months))});
+        WHERE LOWER(emotion) = LOWER(?)
+        AND strftime('%m', date) IN ({','.join(['?'] * len(months))});
     """
     # Execute the query with the emotion and months as parameters
-    cursor.execute(query, (emotion, *months))
+    cursor.execute(query, tuple([emotion] + months))
     result = cursor.fetchone()
 
     # Display the result
     if result and result[0] is not None:
         return round(result[0], 2)
     else:
-        return(f"No data available for {emotion} during {season}")
+        return 0.0
 
 
 
