@@ -55,6 +55,12 @@
             <button21 onclick='fetchMostFrequentEmotionDay("Dreadful")'>Dreadful</button21>
             <button22 onclick='fetchMostFrequentEmotionDay("Anxious")'>Anxious</button22>
         </div>
+
+     <div id="result1" class="hidden">
+        <hs id="emotionResultDisplay1"></hs>
+        <p1 id="emotionResultDisplay2"></p1>
+    </div>
+    
     
         <div id="buttonContainer2" class="hidden">
             <button2 onclick='fetchMostFrequentEmotionTime("Joyful")'>Joyful</button2>
@@ -80,6 +86,11 @@
             <button20 onclick='fetchMostFrequentEmotionTime("Sad")'>Sad</button20>
             <button21 onclick='fetchMostFrequentEmotionTime("Dreadful")'>Dreadful</button21>
             <button22 onclick='fetchMostFrequentEmotionTime("Anxious")'>Anxious</button22>
+        </div>
+
+        <div id="result2" class="hidden">
+            <hs id="emotionResultDisplay3"></hs>
+            <p1 id="emotionResultDisplay4"></p1>
         </div>
     
         <div id="buttonContainer3" class="hidden">
@@ -107,9 +118,21 @@
             <button21 onclick='fetchMostFrequentEmotionSeason("Dreadful")'>Dreadful</button21>
             <button22 onclick='fetchMostFrequentEmotionSeason("Anxious")'>Anxious</button22>
         </div>
+
+        <div id="result3" class="hidden">
+            <hs id="emotionResultDisplay5"></hs>
+            <p1 id="emotionResultDisplay6"></p1>
+        </div>
+
         <div id="buttonContainer4" class="hidden">
             <button2 onclick='fetchIntensity()'>Intensity Overall</button2>
         </div>
+
+        <div id="result4" class="hidden">
+            <hs id="emotionResultDisplay7"></hs>
+            <p1 id="emotionResultDisplay8"></p1>
+        </div>
+
         <div id="buttonContainer5" class="hidden">
             <button onclick="fetchIntensityOverallDay('Monday')">Monday</button>
             <button onclick="fetchIntensityOverallDay('Tuesday')">Tuesday</button>
@@ -119,6 +142,12 @@
             <button onclick="fetchIntensityOverallDay('Saturday')">Saturday</button>
             <button onclick="fetchIntensityOverallDay('Sunday')">Sunday</button>
         </div>
+
+        <div id="result5" class="hidden">
+            <hs id="emotionResultDisplay9"></hs>
+            <p1 id="emotionResultDisplay10"></p1>
+        </div>
+
         <div id="buttonContainer6" class="hidden">
             <button2 onclick="fetchIntensityOverallTime('Morning')":>Morning: 6:00am-9:59am</button2>
             <button2 onclick="fetchIntensityOverallTime('Late morning')">Late morning: 10:00am-11:59am</button2>
@@ -130,11 +159,21 @@
             <button2 onclick="fetchIntensityOverallTime('Early morning')">Early morning: 4:00am-5:59am</button2>
         </div>
 
+        <div id="result6" class="hidden">
+            <hs id="emotionResultDisplay11"></hs>
+            <p1 id="emotionResultDisplay12"></p1>
+        </div>
+
         <div id="buttonContainer7" class="hidden">
-            <button2 onclick="fetchIntensityOverallSeason('Fall')":>Summer</button2>
+            <button2 onclick="fetchIntensityOverallSeason('Fall')":>Fall</button2>
             <button2 onclick="fetchIntensityOverallSeason('Winter')">Winter</button2>
             <button2 onclick="fetchIntensityOverallSeason('Spring')">Spring</button2>
             <button2 onclick="fetchIntensityOverallSeason('Summer')">Summer</button2>
+        </div>
+
+        <div id="result7" class="hidden">
+            <hs id="emotionResultDisplay13"></hs>
+            <p1 id="emotionResultDisplay14"></p1>
         </div>
 
         <div id="buttonContainer8" class="hidden">
@@ -179,6 +218,11 @@
 
             <!-- Submit Button -->
             <button onclick="submitIntensityByDay()">Check Intensity</button>
+            </div>
+
+            <div id="result8" class="hidden">
+                <hs id="emotionResultDisplay15"></hs>
+                <p1 id="emotionResultDisplay16"></p1>
             </div>
 
 
@@ -227,6 +271,11 @@
                 <button onclick="submitIntensityByTime()">Check Intensity</button>
         </div>
 
+        <div id="result9" class="hidden">
+            <hs id="emotionResultDisplay17"></hs>
+            <p1 id="emotionResultDisplay18"></p1>
+        </div>
+
         <div id="buttonContainer10" class="hidden">
             <label for="emotionDropdownSeason">Emotion:</label>
             <select id="emotionDropdownSeason">
@@ -267,6 +316,12 @@
             <!-- Submit Button -->
             <button onclick="submitIntensityBySeason()">Check Intensity</button>
         </div>
+
+        <div id="result10" class="hidden">
+            <hs id="emotionResultDisplay19"></hs>
+            <p1 id="emotionResultDisplay20"></p1>
+        </div>
+
     </div>
 </div>
 
