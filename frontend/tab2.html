@@ -20,9 +20,12 @@
                 <option value="option2">What time of day am I most likely to feel ____?</option>
                 <option value="option3">What time of year am I most likely to feel ____?</option>
                 <option value="option4">How intensely do I feel my emotions overall?</option>
-                <option value="option5">How intensely do I feel ____ on a specific day of the week?</option>
-                <option value="option6">How intensely do I feel ____ during a specific time of day?</option>
-                <option value="option7">How intensely do I feel ____ during a specific time of year?</option>
+                <option value="option5">How intensely do I feel my emotions overall on _________ ?</option>
+                <option value="option6">How intensely do I feel my emotions overall during the _________ ?</option>
+                <option value="option7">How intensely do I feel my emotions overall during the ________?</option>
+                <option value="option8">How intensely do I feel ____ during on a _________?</option>
+                <option value="option9">How intensely do I feel ____ during the  _________?</option>
+                <option value="option10">How intensely do I feel ____ during  _________?</option>
             </select>
         </div>
     
@@ -45,9 +48,9 @@
             <button14 onclick='fetchMostFrequentEmotionDay("Stressed")'>Stressed</button14>
             <button15 onclick='fetchMostFrequentEmotionDay("Angry")'>Angry</button15>
             <button16 onclick='fetchMostFrequentEmotionDay("Annoyed")'>Annoyed</button16>
-            <button17 onclick='fetchMostFrequentEmotionDay("Dissapointed")'>Dissapointed</button17>
+            <button17 onclick='fetchMostFrequentEmotionDay("Disappointed")'>Disappointed</button17>
             <button18 onclick='fetchMostFrequentEmotionDay("Disgusted")'>Disgusted</button18>
-            <button19 onclick='fetchMostFrequentEmotionDay("Embarrased")'>Embarrased</button19>
+            <button19 onclick='fetchMostFrequentEmotionDay("Embarrassed")'>Embarrassed</button19>
             <button20 onclick='fetchMostFrequentEmotionDay("Sad")'>Sad</button20>
             <button21 onclick='fetchMostFrequentEmotionDay("Dreadful")'>Dreadful</button21>
             <button22 onclick='fetchMostFrequentEmotionDay("Anxious")'>Anxious</button22>
@@ -71,9 +74,9 @@
             <button14 onclick='fetchMostFrequentEmotionTime("Stressed")'>Stressed</button14>
             <button15 onclick='fetchMostFrequentEmotionTime("Angry")'>Angry</button15>
             <button16 onclick='fetchMostFrequentEmotionTime("Annoyed")'>Annoyed</button16>
-            <button17 onclick='fetchMostFrequentEmotionTime("Dissapointed")'>Dissapointed</button17>
+            <button17 onclick='fetchMostFrequentEmotionTime("Disappointed")'>Disappointed</button17>
             <button18 onclick='fetchMostFrequentEmotionTime("Disgusted")'>Disgusted</button18>
-            <button19 onclick='fetchMostFrequentEmotionTime("Embarrased")'>Embarrased</button19>
+            <button19 onclick='fetchMostFrequentEmotionTime("Embarrassed")'>Embarrassed</button19>
             <button20 onclick='fetchMostFrequentEmotionTime("Sad")'>Sad</button20>
             <button21 onclick='fetchMostFrequentEmotionTime("Dreadful")'>Dreadful</button21>
             <button22 onclick='fetchMostFrequentEmotionTime("Anxious")'>Anxious</button22>
@@ -97,9 +100,9 @@
             <button14 onclick='fetchMostFrequentEmotionSeason("Stressed")'>Stressed</button14>
             <button15 onclick='fetchMostFrequentEmotionSeason("Angry")'>Angry</button15>
             <button16 onclick='fetchMostFrequentEmotionSeason("Annoyed")'>Annoyed</button16>
-            <button17 onclick='fetchMostFrequentEmotionSeason("Dissapointed")'>Dissapointed</button17>
+            <button17 onclick='fetchMostFrequentEmotionSeason("Disappointed")'>Disappointed</button17>
             <button18 onclick='fetchMostFrequentEmotionSeason("Disgusted")'>Disgusted</button18>
-            <button19 onclick='fetchMostFrequentEmotionSeason("Embarrased")'>Embarrased</button19>
+            <button19 onclick='fetchMostFrequentEmotionSeason("Embarrassed")'>Embarrassed</button19>
             <button20 onclick='fetchMostFrequentEmotionSeason("Sad")'>Sad</button20>
             <button21 onclick='fetchMostFrequentEmotionSeason("Dreadful")'>Dreadful</button21>
             <button22 onclick='fetchMostFrequentEmotionSeason("Anxious")'>Anxious</button22>
@@ -107,16 +110,164 @@
         <div id="buttonContainer4" class="hidden">
             <button2 onclick='fetchIntensity()'>Intensity Overall</button2>
         </div>
-        <div id="buttonContainer6" class="hidden">
-            <button2 onclick='fetchIntensitybyTime()'>Morning 6:00am-9:59am</button2>
-            <button2 onclick='fetchIntensitybyTime()'>Late morning 10:00am-11:59am</button2>
-            <button2 onclick='fetchIntensitybyTime()'>Afternoon 12:00pm-3:59pm</button2>
-            <button2 onclick='fetchIntensitybyTime()'>Early evening 4:00pm-5:59pm</button2>
-            <button2 onclick='fetchIntensitybyTime()'>Evening 6:00pm-8:59pm</button2>
-            <button2 onclick='fetchIntensitybyTime()'>Night 9:00pm-11:59pm</button2>
-            <button2 onclick='fetchIntensitybyTime()'>Late night 12:00am-3:59am</button2>
-            <button2 onclick='fetchIntensitybyTime()'>Early morning 4:00am-5:59am</button2>
+        <div id="buttonContainer5" class="hidden">
+            <button onclick="fetchIntensityOverallDay('Monday')">Monday</button>
+            <button onclick="fetchIntensityOverallDay('Tuesday')">Tuesday</button>
+            <button onclick="fetchIntensityOverallDay('Wednesday')">Wednesday</button>
+            <button onclick="fetchIntensityOverallDay('Thursday')">Thursday</button>
+            <button onclick="fetchIntensityOverallDay('Friday')">Friday</button>
+            <button onclick="fetchIntensityOverallDay('Saturday')">Saturday</button>
+            <button onclick="fetchIntensityOverallDay('Sunday')">Sunday</button>
         </div>
+        <div id="buttonContainer6" class="hidden">
+            <button2 onclick="fetchIntensityOverallTime('Morning')":>Morning: 6:00am-9:59am</button2>
+            <button2 onclick="fetchIntensityOverallTime('Late morning')">Late morning: 10:00am-11:59am</button2>
+            <button2 onclick="fetchIntensityOverallTime('Afternoon')">Afternoon: 12:00pm-3:59pm</button2>
+            <button2 onclick="fetchIntensityOverallTime('Early evening')">Early evening: 4:00pm-5:59pm</button2>
+            <button2 onclick="fetchIntensityOverallTime('Evening')">Evening: 6:00pm-8:59pm</button2>
+            <button2 onclick="fetchIntensityOverallTime('Night')">Night: 9:00pm-11:59pm</button2>
+            <button2 onclick="fetchIntensityOverallTime('Late night')">Late night: 12:00am-3:59am</button2>
+            <button2 onclick="fetchIntensityOverallTime('Early morning')">Early morning: 4:00am-5:59am</button2>
+        </div>
+
+        <div id="buttonContainer7" class="hidden">
+            <button2 onclick="fetchIntensityOverallSeason('Fall')":>Summer</button2>
+            <button2 onclick="fetchIntensityOverallSeason('Winter')">Winter</button2>
+            <button2 onclick="fetchIntensityOverallSeason('Spring')">Spring</button2>
+            <button2 onclick="fetchIntensityOverallSeason('Summer')">Summer</button2>
+        </div>
+
+        <div id="buttonContainer8" class="hidden">
+            <label for="emotionDropdownDay">Emotion:</label>
+            <select id="emotionDropdownDay">
+                <option value="">-- Select Emotion --</option>
+                <option value="Joyful">Joyful</option>
+                <option value="Content">Content</option>
+                <option value="Excited">Excited</option>
+                <option value="Loved">Loved</option>
+                <option value="Confident">Confident</option>
+                <option value="Graceful">Graceful</option>
+                <option value="Proud">Proud</option>
+                <option value="Energetic">Energetic</option>
+                <option value="Indifferent">Indifferent</option>
+                <option value="Bored">Bored</option>
+                <option value="Distant">Distant</option>
+                <option value="Calm">Calm</option>
+                <option value="Stressed">Stressed</option>
+                <option value="Angry">Angry</option>
+                <option value="Annoyed">Annoyed</option>
+                <option value="Disappointed">Disappointed</option>
+                <option value="Disgusted">Disgusted</option>
+                <option value="Embarrassed">Embarrassed</option>
+                <option value="Sad">Sad</option>
+                <option value="Dreadful">Dreadful</option>
+                <option value="Anxious">Anxious</option>
+            </select>
+
+            <!-- Day of Week Dropdown -->
+            <label for="dayDropdown">Day of Week:</label>
+            <select id="dayDropdown">
+                <option value="">-- Select Day --</option>
+                <option value="Monday">Monday</option>
+                <option value="Tuesday">Tuesday</option>
+                <option value="Wednesday">Wednesday</option>
+                <option value="Thursday">Thursday</option>
+                <option value="Friday">Friday</option>
+                <option value="Saturday">Saturday</option>
+                <option value="Sunday">Sunday</option>
+            </select>
+
+            <!-- Submit Button -->
+            <button onclick="submitIntensityByDay()">Check Intensity</button>
+            </div>
+
+
+            <div id="buttonContainer9" class="hidden">
+                <label for="emotionDropdownTime">Emotion:</label>
+                <select id="emotionDropdownTime">
+                    <option value="">-- Select Emotion --</option>
+                    <option value="Joyful">Joyful</option>
+                    <option value="Content">Content</option>
+                    <option value="Excited">Excited</option>
+                    <option value="Loved">Loved</option>
+                    <option value="Confident">Confident</option>
+                    <option value="Graceful">Graceful</option>
+                    <option value="Proud">Proud</option>
+                    <option value="Energetic">Energetic</option>
+                    <option value="Indifferent">Indifferent</option>
+                    <option value="Bored">Bored</option>
+                    <option value="Distant">Distant</option>
+                    <option value="Calm">Calm</option>
+                    <option value="Stressed">Stressed</option>
+                    <option value="Angry">Angry</option>
+                    <option value="Annoyed">Annoyed</option>
+                    <option value="Disappointed">Disappointed</option>
+                    <option value="Disgusted">Disgusted</option>
+                    <option value="Embarrassed">Embarrassed</option>
+                    <option value="Sad">Sad</option>
+                    <option value="Dreadful">Dreadful</option>
+                    <option value="Anxious">Anxious</option>
+                </select>
+    
+                <!-- Time of day Dropdown -->
+                <label for="timeDropdown">Time:</label>
+                <select id="timeDropdown">
+                    <option value="">-- Select Time --</option>
+                    <option value="Morning">Morning: 6:00am-9:59am</option>
+                    <option value="Late morning">Late morning: 10:00am-11:59am</option>
+                    <option value="Afternoon">Afternoon: 12:00pm-3:59pm</option>
+                    <option value="Early evening">Early evening: 4:00pm-5:59pm</option>
+                    <option value="Evening">Evening: 6:00pm-8:59pm</option>
+                    <option value="Night">Night: 9:00pm-11:59pm</option>
+                    <option value="Late night">Late night: 12:00am-3:59am</option>
+                    <option value="Early morning">Early morning: 4:00am-5:59am</option>
+                </select>
+    
+                <!-- Submit Button -->
+                <button onclick="submitIntensityByTime()">Check Intensity</button>
+        </div>
+
+        <div id="buttonContainer10" class="hidden">
+            <label for="emotionDropdownSeason">Emotion:</label>
+            <select id="emotionDropdownSeason">
+                <option value="">-- Select Emotion --</option>
+                <option value="Joyful">Joyful</option>
+                <option value="Content">Content</option>
+                <option value="Excited">Excited</option>
+                <option value="Loved">Loved</option>
+                <option value="Confident">Confident</option>
+                <option value="Graceful">Graceful</option>
+                <option value="Proud">Proud</option>
+                <option value="Energetic">Energetic</option>
+                <option value="Indifferent">Indifferent</option>
+                <option value="Bored">Bored</option>
+                <option value="Distant">Distant</option>
+                <option value="Calm">Calm</option>
+                <option value="Stressed">Stressed</option>
+                <option value="Angry">Angry</option>
+                <option value="Annoyed">Annoyed</option>
+                <option value="Disappointed">Disappointed</option>
+                <option value="Disgusted">Disgusted</option>
+                <option value="Embarrassed">Embarrassed</option>
+                <option value="Sad">Sad</option>
+                <option value="Dreadful">Dreadful</option>
+                <option value="Anxious">Anxious</option>
+            </select>
+
+            <!-- Time of day Dropdown -->
+            <label for="seasonDropdown">Season:</label>
+            <select id="seasonDropdown">
+                <option value="">-- Select Season --</option>
+                <option value="Fall">Fall</option>
+                <option value="Winter">Winter</option>
+                <option value="Spring">Spring</option>
+                <option value="Summer">Summer</option>
+            </select>
+
+            <!-- Submit Button -->
+            <button onclick="submitIntensityBySeason()">Check Intensity</button>
+        </div>
+    </div>
 </div>
 
     <script src="main.js"></script>
