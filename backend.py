@@ -417,10 +417,6 @@ def intensityBySeason(emotion, season):
         return 0.0
 
 
-
-
-
-
 #testing
 #cursor.execute("SELECT * from mood_tracker")
 #entries = cursor.fetchall()
