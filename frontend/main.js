@@ -69,14 +69,29 @@ function updateEmotions() {
 
 
 async function saveMoodData(){
+    // form input validation, making sure user selected all options before saving data
+    let category1 = document.getElementById("category").value;
+    let emotion1 = document.getElementById("emotion").value;
+    let intensity1 = document.getElementById("intensity").value;
+    let reasons1 = document.getElementById("reasons").value;
+
+    let statusMessage = document.querySelector("#statusMessage");
+
+    if (!category1 || !emotion1 || !intensity1 || !reasons1) {
+        statusMessage.textContent = "Please fill out all fields.";
+        statusMessage.style.color = "red";
+        statusMessage.style.display = "block"; // Show message
+        return;
+    }
+
     let moodEntry = {
         dayOfWeek: new Date().toLocaleString('en-us', { weekday: 'long'}),
         date: new Date().toISOString().split("T")[0], // YYYY-MM-DD
         time: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", hour12: true }),
-        intensity: document.getElementById("intensity").value,
-        emotion: document.getElementById("emotion").value,
-        category: document.getElementById("category").value,
-        reasons: document.getElementById("reasons").value.split(",") // Convert to list.
+        intensity: intensity1,
+        emotion: emotion1,
+        category: category1,
+        reasons: reasons1.split(",") // Convert to list.
     };
 
 
@@ -86,13 +101,22 @@ async function saveMoodData(){
     try {
         let response = await eel.saveToJson(moodJSON)();
         if(response === "Success"){
-            alert("Data saved successfully!");
+            statusMessage.textContent = "Successfully saved data!";
+            statusMessage.style.color = "#2E8B57"
+            statusMessage.style.display = "inline-block";
+
+            //document.getElementById("intensity").value = "";
+            //document.getElementById("reasons").value = "";
         } else {
-            alert("Failed to save data.")
+            statusMessage.textContent = "Failed to save data.";
+            statusMessage.style.display = "inline-block";
+            statusMessage.style.color = "red";
         }
     } catch(error){
         console.log("There was an error sending the data to the backend:", error);
-        alert("Failed to save data.")
+        statusMessage.textContent = "Failed to save data.";
+        statusMessage.style.color = "red";
+        statusMessage.style.display = "inline-block";
     }
 }
     //highestDayFreq

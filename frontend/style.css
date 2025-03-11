@@ -118,6 +118,18 @@ iframe {
     background-color: #B97375;
  }
  
+ .status-box {
+    color: #B97375;
+    background-color: #F1E4E8; 
+    padding: 10px;
+    border-radius: 8px; 
+    display: inline-block; 
+    margin-top: 10px; 
+    margin: 10px auto;
+    font-weight: bold; 
+    max-width: 400px;
+}
+ 
  
  /* result */
 
@@ -147,4 +159,5 @@ iframe {
     text-align: center;
     margin: 20px auto;
  }
+
  
