@@ -428,4 +428,4 @@ conn.commit()
 conn.close()
 
 eel.init('frontend')
-eel.start('main.html')
+eel.start('main.html', size=(800, 600))
