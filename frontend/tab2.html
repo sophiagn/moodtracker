@@ -26,112 +26,107 @@
                 <option value="option8">How intensely do I feel ____ on a specific day of the week?</option>
                 <option value="option9">How intensely do I feel ____ during a specific time of day?</option>
                 <option value="option10">How intensely do I feel ____ during a specific time of year?</option>
+                <option value="option10">What is the most common reason that I feel ____?</option>
             </select>
         </div>
     
         <!-- Container for buttons based on options -->
         <div id="buttonContainer1" class="hidden">
-            <button2 onclick='fetchMostFrequentEmotionDay("Joyful")'>Joyful</button2>
-            <button45 onclick='fetchMostFrequentEmotionDay("Content")'>Content</button45>
-            <button3 onclick='fetchMostFrequentEmotionDay("Excited")'>Excited</button3>
-            <button4 onclick='fetchMostFrequentEmotionDay("Loved")'>Loved</button4>
-            <button5 onclick='fetchMostFrequentEmotionDay("Confident")'>Confident</button5>
-            <button6 onclick='fetchMostFrequentEmotionDay("Graceful")'>Graceful</button6>
-            <button7 onclick='fetchMostFrequentEmotionDay("Proud")'>Proud</button7>
-            <button8 onclick='fetchMostFrequentEmotionDay("Energetic")'>Energetic</button8>
+            <button onclick='fetchMostFrequentEmotionDay("Joyful")'>Joyful</button>
+            <button onclick='fetchMostFrequentEmotionDay("Content")'>Content</button>
+            <button onclick='fetchMostFrequentEmotionDay("Excited")'>Excited</button>
+            <button onclick='fetchMostFrequentEmotionDay("Loved")'>Loved</button>
+            <button onclick='fetchMostFrequentEmotionDay("Confident")'>Confident</button>
+            <button onclick='fetchMostFrequentEmotionDay("Graceful")'>Graceful</button>
+            <button onclick='fetchMostFrequentEmotionDay("Proud")'>Proud</button>
+            <button onclick='fetchMostFrequentEmotionDay("Energetic")'>Energetic</button>
 
-            <button10 onclick='fetchMostFrequentEmotionDay("Indifferent")'>Indifferent</button10>
-            <button11 onclick='fetchMostFrequentEmotionDay("Bored")'>Bored</button11>
-            <button12 onclick='fetchMostFrequentEmotionDay("Distant")'>Distant</button12>
-            <button13 onclick='fetchMostFrequentEmotionDay("Calm")'>Calm</button13>
+            <button onclick='fetchMostFrequentEmotionDay("Indifferent")'>Indifferent</button>
+            <button onclick='fetchMostFrequentEmotionDay("Bored")'>Bored</button>
+            <button onclick='fetchMostFrequentEmotionDay("Distant")'>Distant</button>
+            <button onclick='fetchMostFrequentEmotionDay("Calm")'>Calm</button>
 
-            <button14 onclick='fetchMostFrequentEmotionDay("Stressed")'>Stressed</button14>
-            <button15 onclick='fetchMostFrequentEmotionDay("Angry")'>Angry</button15>
-            <button16 onclick='fetchMostFrequentEmotionDay("Annoyed")'>Annoyed</button16>
-            <button17 onclick='fetchMostFrequentEmotionDay("Disappointed")'>Disappointed</button17>
-            <button18 onclick='fetchMostFrequentEmotionDay("Disgusted")'>Disgusted</button18>
-            <button19 onclick='fetchMostFrequentEmotionDay("Embarrassed")'>Embarrassed</button19>
-            <button20 onclick='fetchMostFrequentEmotionDay("Sad")'>Sad</button20>
-            <button21 onclick='fetchMostFrequentEmotionDay("Dreadful")'>Dreadful</button21>
-            <button22 onclick='fetchMostFrequentEmotionDay("Anxious")'>Anxious</button22>
+            <button onclick='fetchMostFrequentEmotionDay("Stressed")'>Stressed</button>
+            <button onclick='fetchMostFrequentEmotionDay("Angry")'>Angry</button>
+            <button onclick='fetchMostFrequentEmotionDay("Annoyed")'>Annoyed</button>
+            <button onclick='fetchMostFrequentEmotionDay("Disappointed")'>Disappointed</button>
+            <button onclick='fetchMostFrequentEmotionDay("Disgusted")'>Disgusted</button>
+            <button onclick='fetchMostFrequentEmotionDay("Embarrassed")'>Embarrassed</button>
+            <button onclick='fetchMostFrequentEmotionDay("Sad")'>Sad</button>
+            <button onclick='fetchMostFrequentEmotionDay("Dreadful")'>Dreadful</button>
+            <button onclick='fetchMostFrequentEmotionDay("Anxious")'>Anxious</button>
         </div>
-
-     <div id="result1" class="hidden">
-        <hs id="emotionResultDisplay1"></hs>
-        <p1 id="emotionResultDisplay2"></p1>
-    </div>
-    
     
         <div id="buttonContainer2" class="hidden">
-            <button2 onclick='fetchMostFrequentEmotionTime("Joyful")'>Joyful</button2>
-            <button45 onclick='fetchMostFrequentEmotionTime("Content")'>Content</button45>
-            <button3 onclick='fetchMostFrequentEmotionTime("Excited")'>Excited</button3>
-            <button4 onclick='fetchMostFrequentEmotionTime("Loved")'>Loved</button4>
-            <button5 onclick='fetchMostFrequentEmotionTime("Confident")'>Confident</button5>
-            <button6 onclick='fetchMostFrequentEmotionTime("Graceful")'>Graceful</button6>
-            <button7 onclick='fetchMostFrequentEmotionTime("Proud")'>Proud</button7>
-            <button8 onclick='fetchMostFrequentEmotionTime("Energetic")'>Energetic</button8>
+            <button onclick='fetchMostFrequentEmotionTime("Joyful")'>Joyful</button>
+            <button onclick='fetchMostFrequentEmotionTime("Content")'>Content</button>
+            <button onclick='fetchMostFrequentEmotionTime("Excited")'>Excited</button>
+            <button onclick='fetchMostFrequentEmotionTime("Loved")'>Loved</button>
+            <button onclick='fetchMostFrequentEmotionTime("Confident")'>Confident</button>
+            <button onclick='fetchMostFrequentEmotionTime("Graceful")'>Graceful</button>
+            <button onclick='fetchMostFrequentEmotionTime("Proud")'>Proud</button>
+            <button onclick='fetchMostFrequentEmotionTime("Energetic")'>Energetic</button>
 
-            <button10 onclick='fetchMostFrequentEmotionTime("Indifferent")'>Indifferent</button10>
-            <button11 onclick='fetchMostFrequentEmotionTime("Bored")'>Bored</button11>
-            <button12 onclick='fetchMostFrequentEmotionTime("Distant")'>Distant</button12>
-            <button13 onclick='fetchMostFrequentEmotionTime("Calm")'>Calm</button13>
+            <button onclick='fetchMostFrequentEmotionTime("Indifferent")'>Indifferent</button>
+            <button onclick='fetchMostFrequentEmotionTime("Bored")'>Bored</button>
+            <button onclick='fetchMostFrequentEmotionTime("Distant")'>Distant</button>
+            <button onclick='fetchMostFrequentEmotionTime("Calm")'>Calm</button>
 
-            <button14 onclick='fetchMostFrequentEmotionTime("Stressed")'>Stressed</button14>
-            <button15 onclick='fetchMostFrequentEmotionTime("Angry")'>Angry</button15>
-            <button16 onclick='fetchMostFrequentEmotionTime("Annoyed")'>Annoyed</button16>
-            <button17 onclick='fetchMostFrequentEmotionTime("Disappointed")'>Disappointed</button17>
-            <button18 onclick='fetchMostFrequentEmotionTime("Disgusted")'>Disgusted</button18>
-            <button19 onclick='fetchMostFrequentEmotionTime("Embarrassed")'>Embarrassed</button19>
-            <button20 onclick='fetchMostFrequentEmotionTime("Sad")'>Sad</button20>
-            <button21 onclick='fetchMostFrequentEmotionTime("Dreadful")'>Dreadful</button21>
-            <button22 onclick='fetchMostFrequentEmotionTime("Anxious")'>Anxious</button22>
+            <button onclick='fetchMostFrequentEmotionTime("Stressed")'>Stressed</button>
+            <button onclick='fetchMostFrequentEmotionTime("Angry")'>Angry</button>
+            <button onclick='fetchMostFrequentEmotionTime("Annoyed")'>Annoyed</button>
+            <button onclick='fetchMostFrequentEmotionTime("Disappointed")'>Disappointed</button>
+            <button onclick='fetchMostFrequentEmotionTime("Disgusted")'>Disgusted</button>
+            <button onclick='fetchMostFrequentEmotionTime("Embarrassed")'>Embarrassed</button>
+            <button onclick='fetchMostFrequentEmotionTime("Sad")'>Sad</button>
+            <button onclick='fetchMostFrequentEmotionTime("Dreadful")'>Dreadful</button>
+            <button onclick='fetchMostFrequentEmotionTime("Anxious")'>Anxious</button>
         </div>
 
-        <div id="result2" class="hidden">
+        <!-- <div id="result" class="hidden">
             <hs id="emotionResultDisplay3"></hs>
             <p1 id="emotionResultDisplay4"></p1>
-        </div>
+        </div> -->
     
         <div id="buttonContainer3" class="hidden">
-            <button2 onclick='fetchMostFrequentEmotionSeason("Joyful")'>Joyful</button2>
-            <button45 onclick='fetchMostFrequentEmotionSeason("Content")'>Content</button45>
-            <button3 onclick='fetchMostFrequentEmotionSeason("Excited")'>Excited</button3>
-            <button4 onclick='fetchMostFrequentEmotionSeason("Loved")'>Loved</button4>
-            <button5 onclick='fetchMostFrequentEmotionSeason("Confident")'>Confident</button5>
-            <button6 onclick='fetchMostFrequentEmotionSeason("Graceful")'>Graceful</button6>
-            <button7 onclick='fetchMostFrequentEmotionSeason("Proud")'>Proud</button7>
-            <button8 onclick='fetchMostFrequentEmotionSeason("Energetic")'>Energetic</button8>
+            <button onclick='fetchMostFrequentEmotionSeason("Joyful")'>Joyful</button>
+            <button onclick='fetchMostFrequentEmotionSeason("Content")'>Content</button>
+            <button onclick='fetchMostFrequentEmotionSeason("Excited")'>Excited</button>
+            <button onclick='fetchMostFrequentEmotionSeason("Loved")'>Loved</button>
+            <button onclick='fetchMostFrequentEmotionSeason("Confident")'>Confident</button>
+            <button onclick='fetchMostFrequentEmotionSeason("Graceful")'>Graceful</button>
+            <button onclick='fetchMostFrequentEmotionSeason("Proud")'>Proud</button>
+            <button onclick='fetchMostFrequentEmotionSeason("Energetic")'>Energetic</button>
 
-            <button10 onclick='fetchMostFrequentEmotionSeason("Indifferent")'>Indifferent</button10>
-            <button11 onclick='fetchMostFrequentEmotionSeason("Bored")'>Bored</button11>
-            <button12 onclick='fetchMostFrequentEmotionSeason("Distant")'>Distant</button12>
-            <button13 onclick='fetchMostFrequentEmotionSeason("Calm")'>Calm</button13>
+            <button onclick='fetchMostFrequentEmotionSeason("Indifferent")'>Indifferent</button>
+            <button onclick='fetchMostFrequentEmotionSeason("Bored")'>Bored</button>
+            <button onclick='fetchMostFrequentEmotionSeason("Distant")'>Distant</button>
+            <button onclick='fetchMostFrequentEmotionSeason("Calm")'>Calm</button>
 
-            <button14 onclick='fetchMostFrequentEmotionSeason("Stressed")'>Stressed</button14>
-            <button15 onclick='fetchMostFrequentEmotionSeason("Angry")'>Angry</button15>
-            <button16 onclick='fetchMostFrequentEmotionSeason("Annoyed")'>Annoyed</button16>
-            <button17 onclick='fetchMostFrequentEmotionSeason("Disappointed")'>Disappointed</button17>
-            <button18 onclick='fetchMostFrequentEmotionSeason("Disgusted")'>Disgusted</button18>
-            <button19 onclick='fetchMostFrequentEmotionSeason("Embarrassed")'>Embarrassed</button19>
-            <button20 onclick='fetchMostFrequentEmotionSeason("Sad")'>Sad</button20>
-            <button21 onclick='fetchMostFrequentEmotionSeason("Dreadful")'>Dreadful</button21>
-            <button22 onclick='fetchMostFrequentEmotionSeason("Anxious")'>Anxious</button22>
+            <button onclick='fetchMostFrequentEmotionSeason("Stressed")'>Stressed</button>
+            <button onclick='fetchMostFrequentEmotionSeason("Angry")'>Angry</button>
+            <button onclick='fetchMostFrequentEmotionSeason("Annoyed")'>Annoyed</button>
+            <button onclick='fetchMostFrequentEmotionSeason("Disappointed")'>Disappointed</button>
+            <button onclick='fetchMostFrequentEmotionSeason("Disgusted")'>Disgusted</button>
+            <button onclick='fetchMostFrequentEmotionSeason("Embarrassed")'>Embarrassed</button>
+            <button onclick='fetchMostFrequentEmotionSeason("Sad")'>Sad</button>
+            <button onclick='fetchMostFrequentEmotionSeason("Dreadful")'>Dreadful</button>
+            <button onclick='fetchMostFrequentEmotionSeason("Anxious")'>Anxious</button>
         </div>
 
-        <div id="result3" class="hidden">
+        <!-- <div id="result" class="hidden">
             <hs id="emotionResultDisplay5"></hs>
             <p1 id="emotionResultDisplay6"></p1>
-        </div>
+        </div> -->
 
         <div id="buttonContainer4" class="hidden">
-            <button2 onclick='fetchIntensity()'>Intensity Overall</button2>
+            <button onclick='fetchIntensity()'>Intensity Overall</button>
         </div>
 
-        <div id="result4" class="hidden">
+        <!-- <div id="result" class="hidden">
             <hs id="emotionResultDisplay7"></hs>
             <p1 id="emotionResultDisplay8"></p1>
-        </div>
+        </div> -->
 
         <div id="buttonContainer5" class="hidden">
             <button onclick="fetchIntensityOverallDay('Monday')">Monday</button>
@@ -143,38 +138,38 @@
             <button onclick="fetchIntensityOverallDay('Sunday')">Sunday</button>
         </div>
 
-        <div id="result5" class="hidden">
+        <!-- <div id="result" class="hidden">
             <hs id="emotionResultDisplay9"></hs>
             <p1 id="emotionResultDisplay10"></p1>
-        </div>
+        </div> -->
 
         <div id="buttonContainer6" class="hidden">
-            <button2 onclick="fetchIntensityOverallTime('Morning')":>Morning: 6:00am-9:59am</button2>
-            <button2 onclick="fetchIntensityOverallTime('Late morning')">Late morning: 10:00am-11:59am</button2>
-            <button2 onclick="fetchIntensityOverallTime('Afternoon')">Afternoon: 12:00pm-3:59pm</button2>
-            <button2 onclick="fetchIntensityOverallTime('Early evening')">Early evening: 4:00pm-5:59pm</button2>
-            <button2 onclick="fetchIntensityOverallTime('Evening')">Evening: 6:00pm-8:59pm</button2>
-            <button2 onclick="fetchIntensityOverallTime('Night')">Night: 9:00pm-11:59pm</button2>
-            <button2 onclick="fetchIntensityOverallTime('Late night')">Late night: 12:00am-3:59am</button2>
-            <button2 onclick="fetchIntensityOverallTime('Early morning')">Early morning: 4:00am-5:59am</button2>
+            <button onclick="fetchIntensityOverallTime('Morning')":>Morning: 6:00am-9:59am</button>
+            <button onclick="fetchIntensityOverallTime('Late morning')">Late morning: 10:00am-11:59am</button>
+            <button onclick="fetchIntensityOverallTime('Afternoon')">Afternoon: 12:00pm-3:59pm</button>
+            <button onclick="fetchIntensityOverallTime('Early evening')">Early evening: 4:00pm-5:59pm</button>
+            <button onclick="fetchIntensityOverallTime('Evening')">Evening: 6:00pm-8:59pm</button>
+            <button onclick="fetchIntensityOverallTime('Night')">Night: 9:00pm-11:59pm</button>
+            <button onclick="fetchIntensityOverallTime('Late night')">Late night: 12:00am-3:59am</button>
+            <button onclick="fetchIntensityOverallTime('Early morning')">Early morning: 4:00am-5:59am</button>
         </div>
 
-        <div id="result6" class="hidden">
+        <!-- <div id="result" class="hidden">
             <hs id="emotionResultDisplay11"></hs>
             <p1 id="emotionResultDisplay12"></p1>
-        </div>
+        </div> -->
 
         <div id="buttonContainer7" class="hidden">
-            <button2 onclick="fetchIntensityOverallSeason('Fall')":>Fall</button2>
-            <button2 onclick="fetchIntensityOverallSeason('Winter')">Winter</button2>
-            <button2 onclick="fetchIntensityOverallSeason('Spring')">Spring</button2>
-            <button2 onclick="fetchIntensityOverallSeason('Summer')">Summer</button2>
+            <button onclick="fetchIntensityOverallSeason('Fall')":>Fall</button>
+            <button onclick="fetchIntensityOverallSeason('Winter')">Winter</button>
+            <button onclick="fetchIntensityOverallSeason('Spring')">Spring</button>
+            <button onclick="fetchIntensityOverallSeason('Summer')">Summer</button>
         </div>
 
-        <div id="result7" class="hidden">
+        <!-- <div id="result" class="hidden">
             <hs id="emotionResultDisplay13"></hs>
             <p1 id="emotionResultDisplay14"></p1>
-        </div>
+        </div> -->
 
         <div id="buttonContainer8" class="hidden">
             <label for="emotionDropdownDay">Emotion:</label>
@@ -220,10 +215,10 @@
             <button onclick="submitIntensityByDay()">Check Intensity</button>
             </div>
 
-            <div id="result8" class="hidden">
+            <!-- <div id="result" class="hidden">
                 <hs id="emotionResultDisplay15"></hs>
                 <p1 id="emotionResultDisplay16"></p1>
-            </div>
+            </div> -->
 
 
             <div id="buttonContainer9" class="hidden">
@@ -271,10 +266,10 @@
                 <button onclick="submitIntensityByTime()">Check Intensity</button>
         </div>
 
-        <div id="result9" class="hidden">
+        <!-- <div id="result" class="hidden">
             <hs id="emotionResultDisplay17"></hs>
             <p1 id="emotionResultDisplay18"></p1>
-        </div>
+        </div> -->
 
         <div id="buttonContainer10" class="hidden">
             <label for="emotionDropdownSeason">Emotion:</label>
@@ -317,9 +312,14 @@
             <button onclick="submitIntensityBySeason()">Check Intensity</button>
         </div>
 
-        <div id="result10" class="hidden">
+        <!-- <div id="result" class="hidden">
             <hs id="emotionResultDisplay19"></hs>
             <p1 id="emotionResultDisplay20"></p1>
+        </div> -->
+
+        <div id="result" class="hidden">
+            <hs id="queryDisplay"></hs>
+            <p1 id="resultDisplay"></p1>
         </div>
 
     </div>

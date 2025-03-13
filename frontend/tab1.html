@@ -16,7 +16,7 @@
 
         <label for="category">Category:</label>
         <select id="category" onchange="updateEmotions()">
-            <option value="">Select Category</option>
+            <option value="">Select category</option>
             <option value="Good">Good</option>
             <option value="Neutral">Neutral</option>
             <option value="Bad">Bad</option>
@@ -25,19 +25,30 @@
     
         <label for="emotion">Emotion:</label>
         <select id="emotion">
-            <option value="">Select an Emotion</option>
+            <option value="">Select an emotion</option>
         </select><br><br>
 
         <label for="intensity">Intensity (1-5):</label>
     <input type="number" id="intensity" min="1" max="10"><br><br>
    
-
-
+    <label for="reasons">Reason:</label>
+        <select id="reasons">
+            <option value="">Select a reason</option>
+            <option value="Unknown">Unknown</option>
+            <option value="No reason">No reason</option>
+            <option value="Physical health">Physical health</option>
+            <option value="Mental disorder">Mental disorder</option>
+            <option value="Friends">Friends</option>
+            <option value="Partner">Partner</option>
+            <option value="Family">Family</option>
+            <option value="School">School</option>
+            <option value="Work">Work</option>
+            <option value="Thoughts about the future">Thoughts about the future</option>
+            <option value="Thoughts about the past">Thoughts about the past</option>
+            <option value="Myself">Myself</option>
+        </select><br><br>
    
-    <label for="reasons">Reasons (comma-separated):</label>
-    <input type="text" id="reasons"><br><br>
-   
-    <button1 onclick="saveMoodData()">Save Mood Entry</button1>
+    <button2 onclick="saveMoodData()">Save Mood Entry</button2>
     <br>
     <span id="statusMessage" class="status-box" style="display: none;">
     </span>

@@ -75,7 +75,7 @@ body {
 
 @media screen and (max-width: 800px) {
    .tab1-content {
-      height: 470px;
+      height: 480px;
    }
    .tab2-content {
       height: 700px;
@@ -108,7 +108,7 @@ iframe {
     display: none;
  }
 
- button, button2, button1, button3, button4, button5, button6, button7, button8, button9, button10, button11, button12, button13, button14, button15, button16, button17, button18, button19, button20, button21, button22, button23, button24, button45, button25,  button26, button27, button28, button29, button30, button31, button32, button33, button34, button35, button36, button37, button38, button40, button39, button41, button42, button43, button44, button45, button46, button47, button48, button49, button50, button51, button52, button53, button54, button55, button56, button57, button58, button59, button60, button61, button62, button63, button64, button65, button66 {
+ button, button2 {
     border-radius: 10px;
     display: inline-block;
     padding: 10px 15px;
@@ -120,14 +120,21 @@ iframe {
     transition: background-color 0.3s;
  }
  
- 
- button2:hover {
-    background-color: #ebc9d3;
+ button:hover{
+    background-color: #e2bbbc;
  }
- 
- button1:hover{
-    background-color: #B97375;
- }
+
+ button:active{
+   background-color: #be9d9e;
+}
+
+ button2:hover{
+   background-color: #c4898b;
+}
+
+button2:active{
+   background-color: #a57374;
+}
  
  #buttonContainer1, #buttonContainer2, #buttonContainer3, #buttonContainer4 {
     margin-top: 20px;
@@ -164,7 +171,7 @@ iframe {
     font-size: 24px;
  }
 
- #result1, #result2, #result3, #result4, #result5, #result6, #result7, #result8, #result9, #result10{
+ #result{
     color: black;
     background-color:#F1E4E8;
     padding-top: 25px;
