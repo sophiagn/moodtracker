@@ -118,9 +118,9 @@ def highestFreqEmotionDay(emotion):
     else:
         return["No matching data"]
    
-emotion = "Content"
-mostFrequentDays = highestFreqEmotionDay(emotion)
-print(mostFrequentDays)
+# emotion = "Content"
+# mostFrequentDays = highestFreqEmotionDay(emotion)
+# print(mostFrequentDays)
 
 #---------------------------------------
 #SQLite built in function strftime('%m, date_column) lets you extract month from a date
@@ -159,9 +159,9 @@ def highestFreqEmotionSeason(emotion):
     else:
         return ["No matching data"]
 
-emotion = "Stressed"
-mostFrequentSeason = highestFreqEmotionSeason(emotion)
-print(mostFrequentSeason)
+# emotion = "Stressed"
+# mostFrequentSeason = highestFreqEmotionSeason(emotion)
+# print(mostFrequentSeason)
 
 #-------------------------------
 @eel.expose
@@ -198,9 +198,9 @@ def highestFreqEmotionTime(emotion):
         return ["No matching data"]
 
 
-emotion = 'Content'
-mostFrequentTimeCategory = highestFreqEmotionTime(emotion)
-print(mostFrequentTimeCategory)
+# emotion = 'Content'
+# mostFrequentTimeCategory = highestFreqEmotionTime(emotion)
+# print(mostFrequentTimeCategory)
 
 # ------------------------------
 @eel.expose
@@ -222,8 +222,8 @@ def intensityOverall():
         return [0.0]
 
 
-averageIntensity = intensityOverall()
-print(averageIntensity)
+# averageIntensity = intensityOverall()
+# print(averageIntensity)
 
 
 #-------------------------------
@@ -246,9 +246,9 @@ def intensityOverallDay(day_of_week):
     else:
         return "No data available "
    
-day_of_week = 'Monday'
-dayIntensity = intensityOverallDay(day_of_week)
-print(dayIntensity)
+# day_of_week = 'Monday'
+# dayIntensity = intensityOverallDay(day_of_week)
+# print(dayIntensity)
 
 # --------------------------------------
 
@@ -381,6 +381,7 @@ def intensityByTime(emotion, time):
         return round(result[0], 2)
     else:
         return 0.0
+
 # -------------------
 @eel.expose
 def intensityBySeason(emotion, season):
@@ -416,6 +417,48 @@ def intensityBySeason(emotion, season):
     else:
         return 0.0
 
+@eel.expose
+def highestFreqReason(emotion):
+    conn = sqlite3.connect("emotion.db")
+    cursor = conn.cursor()
+    query = """
+    WITH ReasonCounts AS (
+        SELECT
+            CASE
+                WHEN reasons IN (
+                'Unknown',
+                'No reason',
+                'Physical health',
+                'Mental disorder',
+                'Friends',
+                'Partner',
+                'Family',
+                'School',
+                'Work',
+                'Thoughts about the future',
+                'Thoughts about the past',
+                'Myself'
+            ) THEN reasons
+            END AS reasons,
+            COUNT(*) AS count
+        FROM mood_tracker
+        WHERE emotion = ?
+        GROUP BY reasons
+    )
+    SELECT reasons
+    FROM ReasonCounts
+    WHERE count = (SELECT MAX(count) FROM ReasonCounts);
+    """
+    cursor.execute(query, (emotion, ))
+    result = cursor.fetchall()
+    if result and result[0] is not None:
+        return [row[0] for row in result]
+    else:
+        return ["No matching data"]
+
+# emotion = "Joyful"
+# mostFrequentReason = highestFreqReason(emotion)
+# print(mostFrequentReason)
 
 #testing
 #cursor.execute("SELECT * from mood_tracker")

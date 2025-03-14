@@ -14,7 +14,8 @@ document.getElementById("mainDropdown").addEventListener("change", function() {
         document.getElementById("buttonContainer7"),
         document.getElementById("buttonContainer8"),
         document.getElementById("buttonContainer9"),
-        document.getElementById("buttonContainer10")
+        document.getElementById("buttonContainer10"),
+        document.getElementById("buttonContainer11")
     ];
 
     // Hide all containers initially
@@ -41,6 +42,8 @@ document.getElementById("mainDropdown").addEventListener("change", function() {
         buttonContainers[8].classList.remove("hidden"); 
     } else if (selectedValue === "option10") {  
         buttonContainers[9].classList.remove("hidden"); 
+    } else if (selectedValue === "option11") {  
+        buttonContainers[10].classList.remove("hidden"); 
     } 
     
 });
@@ -282,6 +285,20 @@ async function fetchIntensityBySeason(emotion, season) {
 
     resultContainer.classList.remove("hidden"); 
 }
+
+//highestReasonFreq
+async function fetchMostFrequentReason(emotion) { 
+    let result = await eel.highestFreqReason(emotion)(); 
+    let displayElement1 = document.getElementById("queryDisplay");
+    let displayElement2 = document.getElementById("resultDisplay");
+    let resultContainer = document.getElementById("result");
+
+    displayElement1.textContent = `What is the most common reason that I feel ${emotion}?`;
+    displayElement2.textContent = "\n"+ result;
+
+    resultContainer.classList.remove("hidden");
+
+    }
 
 function submitIntensityBySeason() {
     let emotion = document.getElementById("emotionDropdownSeason").value;
