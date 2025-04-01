@@ -116,7 +116,7 @@ def highestFreqEmotionDay(emotion):
     if result and result[0] is not None:
         return [row[0] for row in result]
     else:
-        return["No matching data"]
+        return["No corresponding data"]
    
 # emotion = "Content"
 # mostFrequentDays = highestFreqEmotionDay(emotion)
@@ -157,7 +157,7 @@ def highestFreqEmotionSeason(emotion):
     if result and result[0] is not None:
         return [row[0] for row in result]
     else:
-        return ["No matching data"]
+        return ["No corresponding data"]
 
 # emotion = "Stressed"
 # mostFrequentSeason = highestFreqEmotionSeason(emotion)
@@ -195,7 +195,7 @@ def highestFreqEmotionTime(emotion):
     if result and result[0] is not None:
         return [row[0] for row in result]
     else:
-        return ["No matching data"]
+        return ["No corresponding data"]
 
 
 # emotion = 'Content'
@@ -454,7 +454,7 @@ def highestFreqReason(emotion):
     if result and result[0] is not None:
         return [row[0] for row in result]
     else:
-        return ["No matching data"]
+        return ["No corresponding data"]
 
 # emotion = "Joyful"
 # mostFrequentReason = highestFreqReason(emotion)

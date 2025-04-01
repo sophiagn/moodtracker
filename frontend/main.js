@@ -128,9 +128,10 @@ async function fetchMostFrequentEmotionDay(emotion) {
     let displayElement1 = document.getElementById("queryDisplay");
     let displayElement2 = document.getElementById("resultDisplay");
     let resultContainer = document.getElementById("result");
+    let emotionLower = emotion.toLowerCase();
 
     //alert("Most frequent days: "+ result); 
-    displayElement1.textContent = `What day of the week am I most likely to feel ${emotion}?`;
+    displayElement1.textContent = `What day of the week am I most likely to feel ${emotionLower}?`;
     displayElement2.textContent = "\n"+ result;
 
     resultContainer.classList.remove("hidden");
@@ -144,8 +145,9 @@ async function fetchMostFrequentEmotionTime(emotion) {
     let displayElement1 = document.getElementById("queryDisplay");
     let displayElement2 = document.getElementById("resultDisplay");
     let resultContainer = document.getElementById("result");
+    let emotionLower = emotion.toLowerCase();
 
-    displayElement1.textContent = `What time of day am I most likely to feel ${emotion}?`;
+    displayElement1.textContent = `What time of day am I most likely to feel ${emotionLower}?`;
     displayElement2.textContent = "\n"+ result;
 
     resultContainer.classList.remove("hidden");
@@ -158,8 +160,9 @@ async function fetchMostFrequentEmotionSeason(emotion) {
     let displayElement1 = document.getElementById("queryDisplay");
     let displayElement2 = document.getElementById("resultDisplay");
     let resultContainer = document.getElementById("result");
+    let emotionLower = emotion.toLowerCase();
 
-    displayElement1.textContent = `What time of year am I most likely to feel ${emotion}?`;
+    displayElement1.textContent = `What time of year am I most likely to feel ${emotionLower}?`;
     displayElement2.textContent = "\n"+ result;
 
     resultContainer.classList.remove("hidden");
@@ -172,9 +175,21 @@ async function fetchIntensity() {
     let displayElement1 = document.getElementById("queryDisplay");
     let displayElement2 = document.getElementById("resultDisplay");
     let resultContainer = document.getElementById("result");
+    let resultStr = "";
+
+    if (result > 4.5) resultStr = "Very high intensity";
+    else if (result >= 4) resultStr = "High intensity";
+    else if (result >= 3) resultStr = "Moderate intensity";
+    else if (result >= 2) resultStr = "Low intensity";
+    else if (result >= 1) resultStr = "Very low intensity";
+    else resultStr = "No corresponding data"
 
     displayElement1.textContent = `How intensely do I feel my emotions overall?`;
-    displayElement2.textContent = "\n"+ result + "/5";
+
+    if (resultStr == "No corresponding data")
+        displayElement2.textContent = resultStr;
+    else
+        displayElement2.textContent = resultStr + " (" + result +"/5 on average)";
 
     resultContainer.classList.remove("hidden");
 
@@ -186,9 +201,21 @@ async function fetchIntensityOverallDay(dayOfWeek){
     let displayElement1 = document.getElementById("queryDisplay");
     let displayElement2 = document.getElementById("resultDisplay");
     let resultContainer = document.getElementById("result");
+    let resultStr = "";
+
+    if (result > 4.5) resultStr = "Very high intensity";
+    else if (result >= 4) resultStr = "High intensity";
+    else if (result >= 3) resultStr = "Moderate intensity";
+    else if (result >= 2) resultStr = "Low intensity";
+    else if (result >= 1) resultStr = "Very low intensity";
+    else resultStr = "No corresponding data"
 
     displayElement1.textContent = `How intensely do I feel my emotions overall on a ${dayOfWeek}?`;
-    displayElement2.textContent = "Intensity overall on " + dayOfWeek + " is " + result + "/5";
+    
+    if (resultStr == "No corresponding data")
+        displayElement2.textContent = resultStr;
+    else
+        displayElement2.textContent = resultStr + " (" + result +"/5 on average)";
 
     resultContainer.classList.remove("hidden");
 }
@@ -199,9 +226,22 @@ async function fetchIntensityOverallTime(time) {
     let displayElement1 = document.getElementById("queryDisplay");
     let displayElement2 = document.getElementById("resultDisplay");
     let resultContainer = document.getElementById("result");
+    let resultStr = "";
+    let timeLower = time.toLowerCase();
 
-    displayElement1.textContent = `How intensely do I feel my emotions overall during the ${time}?`;
-    displayElement2.textContent = "Intensity overall at " + time + " is " + result + "/5";
+    if (result > 4.5) resultStr = "Very high intensity";
+    else if (result >= 4) resultStr = "High intensity";
+    else if (result >= 3) resultStr = "Moderate intensity";
+    else if (result >= 2) resultStr = "Low intensity";
+    else if (result >= 1) resultStr = "Very low intensity";
+    else resultStr = "No corresponding data"
+
+    displayElement1.textContent = `How intensely do I feel my emotions overall during the ${timeLower}?`;
+    
+    if (resultStr == "No corresponding data")
+        displayElement2.textContent = resultStr;
+    else
+        displayElement2.textContent = resultStr + " (" + result +"/5 on average)";
 
     resultContainer.classList.remove("hidden"); 
 }
@@ -212,9 +252,22 @@ async function fetchIntensityOverallSeason(season) {
     let displayElement1 = document.getElementById("queryDisplay");
     let displayElement2 = document.getElementById("resultDisplay");
     let resultContainer = document.getElementById("result");
+    let resultStr = "";
+    let seasonLower = season.toLowerCase();
 
-    displayElement1.textContent = `How intensely do I feel my emotions overall during the ${season}?`;
-    displayElement2.textContent = "Intensity overall at " + season + " is " + result + "/5";
+    if (result > 4.5) resultStr = "Very high intensity";
+    else if (result >= 4) resultStr = "High intensity";
+    else if (result >= 3) resultStr = "Moderate intensity";
+    else if (result >= 2) resultStr = "Low intensity";
+    else if (result >= 1) resultStr = "Very low intensity";
+    else resultStr = "No corresponding data"
+
+    displayElement1.textContent = `How intensely do I feel my emotions overall during the ${seasonLower}?`;
+    
+    if (resultStr == "No corresponding data")
+        displayElement2.textContent = resultStr;
+    else
+        displayElement2.textContent = resultStr + " (" + result +"/5 on average)";
 
     resultContainer.classList.remove("hidden"); 
 
@@ -226,9 +279,22 @@ async function fetchIntensityByDay(emotion, dayOfWeek) {
     let displayElement1 = document.getElementById("queryDisplay");
     let displayElement2 = document.getElementById("resultDisplay");
     let resultContainer = document.getElementById("result");
+    let emotionLower = emotion.toLowerCase();
+    let resultStr = "";
 
-    displayElement1.textContent = `How intensely do I feel ${emotion} on a ${dayOfWeek}?`;
-    displayElement2.textContent = "Overall intensity of " + emotion + " on a " + dayOfWeek + " is " + result +"/5";
+    if (result > 4.5) resultStr = "Very high intensity";
+    else if (result >= 4) resultStr = "High intensity";
+    else if (result >= 3) resultStr = "Moderate intensity";
+    else if (result >= 2) resultStr = "Low intensity";
+    else if (result >= 1) resultStr = "Very low intensity";
+    else resultStr = "No corresponding data"
+
+    displayElement1.textContent = `How intensely do I feel ${emotionLower} on a ${dayOfWeek}?`;
+    
+    if (resultStr == "No corresponding data")
+        displayElement2.textContent = resultStr;
+    else
+        displayElement2.textContent = resultStr + " (" + result +"/5 on average)";
 
     resultContainer.classList.remove("hidden"); 
 
@@ -252,9 +318,23 @@ async function fetchIntensityByTime(emotion, time) {
     let displayElement1 = document.getElementById("queryDisplay");
     let displayElement2 = document.getElementById("resultDisplay");
     let resultContainer = document.getElementById("result");
+    let emotionLower = emotion.toLowerCase();
+    let timeLower = time.toLowerCase();
+    let resultStr = "";
 
-    displayElement1.textContent = `How intensely do I feel ${emotion} during the ${time}?`;
-    displayElement2.textContent = "Overall intensity of " + emotion + " during the " + time + " is " + result +"/5";
+    if (result > 4.5) resultStr = "Very high intensity";
+    else if (result >= 4) resultStr = "High intensity";
+    else if (result >= 3) resultStr = "Moderate intensity";
+    else if (result >= 2) resultStr = "Low intensity";
+    else if (result >= 1) resultStr = "Very low intensity";
+    else resultStr = "No corresponding data"
+
+    displayElement1.textContent = `How intensely do I feel ${emotionLower} during the ${timeLower}?`;
+    
+    if (resultStr == "No corresponding data")
+        displayElement2.textContent = resultStr;
+    else
+        displayElement2.textContent = resultStr + " (" + result +"/5 on average)";
 
     resultContainer.classList.remove("hidden");  
 }
@@ -279,9 +359,23 @@ async function fetchIntensityBySeason(emotion, season) {
     let displayElement1 = document.getElementById("queryDisplay");
     let displayElement2 = document.getElementById("resultDisplay");
     let resultContainer = document.getElementById("result");
+    let resultStr = "";
+    let emotionLower = emotion.toLowerCase();
+    let seasonLower = season.toLowerCase();
 
-    displayElement1.textContent = `How intensely do I feel ${emotion} during ${season}?`;
-    displayElement2.textContent = "Overall intensity of " + emotion + " during " + season + " is " + result +"/5";
+    if (result > 4.5) resultStr = "Very high intensity";
+    else if (result >= 4) resultStr = "High intensity";
+    else if (result >= 3) resultStr = "Moderate intensity";
+    else if (result >= 2) resultStr = "Low intensity";
+    else if (result >= 1) resultStr = "Very low intensity";
+    else resultStr = "No corresponding data"
+
+    displayElement1.textContent = `How intensely do I feel ${emotionLower} during the ${seasonLower}?`;
+    
+    if (resultStr == "No corresponding data")
+        displayElement2.textContent = resultStr;
+    else
+        displayElement2.textContent = resultStr + " (" + result +"/5 on average)";
 
     resultContainer.classList.remove("hidden"); 
 }
@@ -292,8 +386,9 @@ async function fetchMostFrequentReason(emotion) {
     let displayElement1 = document.getElementById("queryDisplay");
     let displayElement2 = document.getElementById("resultDisplay");
     let resultContainer = document.getElementById("result");
+    let emotionLower = emotion.toLowerCase();
 
-    displayElement1.textContent = `What is the most common reason that I feel ${emotion}?`;
+    displayElement1.textContent = `What is the most common reason that I feel ${emotionLower}?`;
     displayElement2.textContent = "\n"+ result;
 
     resultContainer.classList.remove("hidden");
