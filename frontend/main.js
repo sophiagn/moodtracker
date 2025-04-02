@@ -87,6 +87,13 @@ async function saveMoodData(){
         return;
     }
 
+    if (intensity1 != 1 && intensity1 != 2 && intensity1 != 3 && intensity1 != 4 && intensity1 != 5) {
+        statusMessage.textContent = "Please enter a valid intensity value.";
+        statusMessage.style.color = "red";
+        statusMessage.style.display = "block"; // Show message
+        return;
+    }
+
     let moodEntry = {
         dayOfWeek: new Date().toLocaleString('en-us', { weekday: 'long'}),
         date: new Date().toISOString().split("T")[0], // YYYY-MM-DD
