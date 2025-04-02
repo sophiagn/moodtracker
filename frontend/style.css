@@ -57,19 +57,19 @@ body {
 /* Style the content area */
 .tab1-content {
     width: 100%;
-    height: 625px;
+    height: 650px;
     margin: 0;
     background: #CEB1BE;
-    box-shadow: 0 10px 4px -4px #7d6c7371;
+    /* box-shadow: 0 10px 4px -4px #7d6c7371; */
     overflow: hidden;
 }
 
 .tab2-content {
     width: 100%;
-    height: 625px;
+    height: 650px;
     margin: 0;
     background-color: #B97375;
-    box-shadow: 0 10px 4px -4px #764a4b67;
+    /* box-shadow: 0 10px 4px -4px #764a4b67; */
     overflow: hidden;
    }
 
@@ -78,7 +78,7 @@ body {
       height: 480px;
    }
    .tab2-content {
-      height: 700px;
+      min-height: 480px;
    }
 }
 
