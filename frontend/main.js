@@ -101,7 +101,7 @@ async function saveMoodData(){
         intensity: intensity1,
         emotion: emotion1,
         category: category1,
-        reasons: reasons1.split(",") // Convert to list.
+        reasons: reasons1.split("; ") // Convert to list.
     };
 
 

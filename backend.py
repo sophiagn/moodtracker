@@ -4,28 +4,14 @@ import json
 from datetime import datetime
 import os
 
+#--------------------------FUNCTIONS--------------------------
 
-#created an empty database - CREATE
-conn = sqlite3.connect("emotion.db")
-cursor = conn.cursor() # cursor object that allows us to traverse our database, and cursor.execute to interact with database via sql request
+# converting 12 hour time to 24 hour time, sql needs it to be in this format
+def convertTimeFormat(timeString):
+    return datetime.strptime(timeString, "%I:%M %p").strftime("%H:%M:%S")
+#--------------
 
-#unique only adds unique values to the table
-cursor.execute("""
-               CREATE TABLE IF NOT EXISTS mood_tracker (
-                    day_of_week TEXT,
-                    date TEXT,
-                    time TEXT,
-                    intensity INTEGER,
-                    emotion TEXT,
-                    category TEXT,
-                    reasons TEXT,
-                    UNIQUE(date, time, emotion)
-               );
-            """)  #Table contains 7 columns, day of week, date, time, (emotion) intensity, emotion, category, reasons
-
-
-# fixed error here
-@eel.expose #exposing the function to main.js
+@eel.expose
 def saveToJson(moodJSON):
     conn = sqlite3.connect("emotion.db")
     cursor = conn.cursor()
@@ -72,18 +58,7 @@ def saveToJson(moodJSON):
     except Exception as e: # general try catch error block
         print(f"Error saving to JSON: {e}")
         return "Failed"
-
-
-#converting 12 hour time to 24 hour time, sql needs it to be in this format
-def convertTimeFormat(timeString):
-    return datetime.strptime(timeString, "%I:%M %p").strftime("%H:%M:%S")
-
-
-try:
-    os.remove("jsonSample.txt")
-    print("jsonSample.txt deleted successfully.")
-except FileNotFoundError:
-    print("File not found, nothing to delete")
+#--------------
 
 # Returns most frequent day(s) of the week associated with the given emotion
 @eel.expose
@@ -104,7 +79,7 @@ def highestFreqEmotionDay(emotion):
     FROM EmotionCounts
     WHERE count = (SELECT MAX(count) FROM EmotionCounts);
     """
-    #EmotionCounts = a temporary table that exists only for query
+    # EmotionCounts = a temporary table that exists only for query
     # selects day_of_week and counting occurences of each day and storing in count column
     # data comes from mood_tracker table
     # filtering only the rows that match the input (?) emotion
@@ -117,12 +92,8 @@ def highestFreqEmotionDay(emotion):
         return [row[0] for row in result]
     else:
         return["No corresponding data"]
-   
-# emotion = "Content"
-# mostFrequentDays = highestFreqEmotionDay(emotion)
-# print(mostFrequentDays)
+#--------------
 
-#---------------------------------------
 #SQLite built in function strftime('%m, date_column) lets you extract month from a date
 #strftime expects to parse date time object that is YYYY MM and DD format
 # SQL CASE Statements are similar to if then statements WHEN/THEN
@@ -158,12 +129,8 @@ def highestFreqEmotionSeason(emotion):
         return [row[0] for row in result]
     else:
         return ["No corresponding data"]
+#--------------
 
-# emotion = "Stressed"
-# mostFrequentSeason = highestFreqEmotionSeason(emotion)
-# print(mostFrequentSeason)
-
-#-------------------------------
 @eel.expose
 def highestFreqEmotionTime(emotion):
     conn = sqlite3.connect("emotion.db")
@@ -196,13 +163,8 @@ def highestFreqEmotionTime(emotion):
         return [row[0] for row in result]
     else:
         return ["No corresponding data"]
+#--------------
 
-
-# emotion = 'Content'
-# mostFrequentTimeCategory = highestFreqEmotionTime(emotion)
-# print(mostFrequentTimeCategory)
-
-# ------------------------------
 @eel.expose
 def intensityOverall():
     conn = sqlite3.connect("emotion.db")
@@ -215,18 +177,12 @@ def intensityOverall():
     cursor.execute(query)
     result = cursor.fetchone()
 
-
     if result and result[0] is not None:
         return round(result[0], 4) #rounding values in the list
     else:
         return [0.0]
+#--------------
 
-
-# averageIntensity = intensityOverall()
-# print(averageIntensity)
-
-
-#-------------------------------
 @eel.expose
 def intensityOverallDay(day_of_week):
     conn = sqlite3.connect("emotion.db")
@@ -245,12 +201,7 @@ def intensityOverallDay(day_of_week):
         return round(result[0], 4)
     else:
         return "No data available "
-   
-# day_of_week = 'Monday'
-# dayIntensity = intensityOverallDay(day_of_week)
-# print(dayIntensity)
-
-# --------------------------------------
+#--------------
 
 # Intensity Overall Time 
 @eel.expose
@@ -283,14 +234,8 @@ def intensityOverallTime(time):
        return round(result[0], 2)
     else:
         return [0.0]
+#--------------
 
-# Example usage
-#emotion = "Stressed"
-#time = "Afternoon"
-#average_intensity = intensityOverallTime(time)
-#print(average_intensity)
-
-# ----------------------------------------
 @eel.expose
 def intensityOverallSeason(season):
     conn = sqlite3.connect("emotion.db")
@@ -320,7 +265,7 @@ def intensityOverallSeason(season):
         return round(result[0], 2)
     else:
         return 0.0  
-
+#--------------
 
 @eel.expose
 def intensityByDay(emotion, day_of_week):
@@ -344,6 +289,7 @@ def intensityByDay(emotion, day_of_week):
         return round(result[0], 2)
     else:
         return 0.0
+#--------------
 
 @eel.expose
 def intensityByTime(emotion, time):
@@ -381,8 +327,8 @@ def intensityByTime(emotion, time):
         return round(result[0], 2)
     else:
         return 0.0
+#--------------
 
-# -------------------
 @eel.expose
 def intensityBySeason(emotion, season):
     conn = sqlite3.connect("emotion.db")
@@ -416,6 +362,7 @@ def intensityBySeason(emotion, season):
         return round(result[0], 2)
     else:
         return 0.0
+#--------------
 
 @eel.expose
 def highestFreqReason(emotion):
@@ -452,20 +399,35 @@ def highestFreqReason(emotion):
     cursor.execute(query, (emotion, ))
     result = cursor.fetchall()
     if result and result[0] is not None:
-        return [row[0] for row in result]
+        return "; ".join([row[0] for row in result])
     else:
         return ["No corresponding data"]
 
-# emotion = "Joyful"
-# mostFrequentReason = highestFreqReason(emotion)
-# print(mostFrequentReason)
+#--------------------------MAIN--------------------------
 
-#testing
-#cursor.execute("SELECT * from mood_tracker")
-#entries = cursor.fetchall()
-#print(f"Number of records inserted: {len(entries)}")
-#for row in entries:
-    #print(row)
+# created an empty database
+conn = sqlite3.connect("emotion.db")
+cursor = conn.cursor() # cursor object that allows us to traverse our database, and cursor.execute to interact with database via sql request
+
+# unique only adds unique values to the table
+cursor.execute("""
+               CREATE TABLE IF NOT EXISTS mood_tracker (
+                    day_of_week TEXT,
+                    date TEXT,
+                    time TEXT,
+                    intensity INTEGER,
+                    emotion TEXT,
+                    category TEXT,
+                    reasons TEXT,
+                    UNIQUE(date, time, emotion)
+               );
+            """)  #Table contains 7 columns, day of week, date, time, (emotion) intensity, emotion, category, reasons
+
+try:
+    os.remove("jsonSample.txt")
+    print("jsonSample.txt deleted successfully.")
+except FileNotFoundError:
+    print("File not found, nothing to delete")
 
 conn.commit()
 conn.close()
