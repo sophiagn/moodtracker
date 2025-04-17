@@ -3,8 +3,24 @@ import sqlite3
 import json
 from datetime import datetime
 import os
+import sys
 
 #--------------------------FUNCTIONS--------------------------
+
+def get_app_data_dir():
+    """Returns the appropriate directory path depending on the OS."""
+    if sys.platform == "win32":
+        return os.path.join(os.path.expanduser("~"), "AppData", "Local", "MoodTracker")
+    elif sys.platform == "darwin":
+        return os.path.join(os.path.expanduser("~"), "Library", "Application Support", "MoodTracker")
+    else:
+        return os.path.join(os.path.expanduser("~"), ".moodtracker")  # Linux
+#--------------
+
+def getJSONPath():
+    APP_DATA_DIR = get_app_data_dir()
+    return os.path.join(APP_DATA_DIR, "jsonSample.txt")
+#-------------- 
 
 # converting 12 hour time to 24 hour time, sql needs it to be in this format
 def convertTimeFormat(timeString):
@@ -16,21 +32,22 @@ def saveToJson(moodJSON):
     conn = sqlite3.connect("emotion.db")
     cursor = conn.cursor()
     try:
+        JSON_SAMPLE_PATH = getJSONPath()
         moodEntry = json.loads(moodJSON) #json.load() is a JSON parsing method in python
 
-        if not os.path.exists("jsonSample.txt"):
-            with open("jsonSample.txt", "w") as file:
+        if not os.path.exists(JSON_SAMPLE_PATH):
+            with open(JSON_SAMPLE_PATH, "w") as file:
                 json.dump({"emotionLog": []}, file)
 
         #make sure current jsonSample.txt is readable
-        with open("jsonSample.txt", "r") as file:
+        with open(JSON_SAMPLE_PATH, "r") as file:
             try:
                 data = json.load(file)
             except json.JSONDecodeError:
                 data = {"emotionLog": []} # initialize if the file is missing
    
         data["emotionLog"].append(moodEntry)
-        with open("jsonSample.txt", "w") as file: #open and write into the jsonSample.txt file
+        with open(JSON_SAMPLE_PATH, "w") as file: #open and write into the jsonSample.txt file
             json.dump(data, file, indent=4)
         
 
@@ -405,6 +422,17 @@ def highestFreqReason(emotion):
 
 #--------------------------MAIN--------------------------
 
+# Create the app data folder if it doesn't exist
+APP_DATA_DIR = get_app_data_dir()
+os.makedirs(APP_DATA_DIR, exist_ok=True)
+
+# Paths inside AppData
+# DB_PATH = os.path.join(APP_DATA_DIR, "emotion.db")
+JSON_SAMPLE_PATH = os.path.join(APP_DATA_DIR, "jsonSample.txt")
+
+# Connect to database
+# conn = sqlite3.connect(DB_PATH)
+
 # created an empty database
 conn = sqlite3.connect("emotion.db")
 cursor = conn.cursor() # cursor object that allows us to traverse our database, and cursor.execute to interact with database via sql request
@@ -424,7 +452,7 @@ cursor.execute("""
             """)  #Table contains 7 columns, day of week, date, time, (emotion) intensity, emotion, category, reasons
 
 try:
-    os.remove("jsonSample.txt")
+    os.remove(JSON_SAMPLE_PATH)
     print("jsonSample.txt deleted successfully.")
 except FileNotFoundError:
     print("File not found, nothing to delete")
